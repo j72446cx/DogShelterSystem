@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dog.shelter.rescue.system.dogrescuesheltersystem.Repository.DogPageRepository">
+    
+    <delete id="delete">
+        delete
+        from Dog
+        where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="list" resultType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Dog">
+        select *
+        from Dog
+        <where>
+            <if test="age != null">
+                age = #{age}
+            </if>
+
+            <if test="gender != null">
+                and gender like concat('%',  #{gender}, '%')
+            </if>
+            
+            <if test="entryStartDate != null and entryEndDate != null">
+                and EntryDate between #{entryStartDate} and #{entryEndDate}
+            </if>
+            
+            <if test="adoptedStartDate != null and adoptedEndDate != null">
+                and AdoptedDate between #{adoptedStartDate} and #{adoptedEndDate}
+            </if>
+
+            <if test="vaccineStartDate != null and vaccineEndDate != null">
+                and LastVaccineDate between #{vaccineStartDate} and #{vaccineEndDate}
+            </if>
+        </where>
+    </select>
+</mapper>

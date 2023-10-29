@@ -10,6 +10,7 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -18,34 +19,33 @@ public class DogPageServiceImpl implements DogPageService {
     @Autowired
     private DogPageRepository dogPageRepository;
 
-//    @Override
-//    public DogPageBean page(Integer page, Integer pageSize){
-//
-//        // Get count of data
-//        Long count = dogPageRepository.count();
-//
-//        // Page Query result
-//        List<Dog> dogList = dogPageRepository.page((page - 1) * pageSize, pageSize);
-//
-//        // Encapsulate PageBean
-//        return new DogPageBean(count, dogList);
-//
-//
-//
-//
-//
-//
-//    }
     @Override
-    public DogPageBean page(Integer page, Integer pageSize){
+    public DogPageBean page(Integer page, Integer pageSize,Integer age, String gender,
+                            LocalDate entryStartDate,
+                            LocalDate entryEndDate,
+                            LocalDate adoptedStartDate,
+                            LocalDate adoptedEndDate,
+                            LocalDate vaccineStartDate,
+                            LocalDate vaccineEndDate){
 
         PageHelper.startPage(page, pageSize);
 
-        List<Dog> dogList = dogPageRepository.list();
+        List<Dog> dogList = dogPageRepository.list(age, gender,
+                entryStartDate,
+                entryEndDate,
+                adoptedStartDate,
+                adoptedEndDate,
+                vaccineStartDate,
+                vaccineEndDate);
         Page<Dog> dogPage = (Page<Dog>) dogList;
 
         // Encapsulate PageBean
         return new DogPageBean(dogPage.getTotal(), dogPage.getResult());
 
+    }
+
+    @Override
+    public void delete(List<Long> ids) {
+        dogPageRepository.delete(ids);
     }
 }

@@ -3,6 +3,7 @@ package com.dog.shelter.rescue.system.dogrescuesheltersystem.domain;
 import net.bytebuddy.asm.Advice;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity

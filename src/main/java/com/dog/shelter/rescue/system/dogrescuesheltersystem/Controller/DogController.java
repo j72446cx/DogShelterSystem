@@ -4,8 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Dog;
-import com.dog.shelter.rescue.system.dogrescuesheltersystem.Service.Impl.DogServiceImpl;
-
 
 import java.util.List;
 
