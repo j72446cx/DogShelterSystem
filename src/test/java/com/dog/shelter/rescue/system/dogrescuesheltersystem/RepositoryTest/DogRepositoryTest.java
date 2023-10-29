@@ -15,6 +15,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -36,11 +39,12 @@ class DogRescueShelterSystemApplicationTests {
     String test_URL_3 = "testHTTPs";
     String test_gender_1 = "male";
     String test_gender_2 = "female";
+    LocalDateTime test_Date = LocalDateTime.now();
 
     /* Only species is same : */
-    Dog dog1 = new Dog(test_name_1,2, test_URL_1, test_species_1,test_status_1,test_medical_1,test_intro_1,test_gender_1);
-    Dog dog2 = new Dog(test_name_2, 3, test_URL_2, test_species_1, test_status_2, test_medical_2, test_intro_2,test_gender_1);
-    Dog dog3 = new Dog(test_name_1, 4, test_URL_3, test_species_2, test_status_1,test_medical_1,test_intro_1,test_gender_2);
+    Dog dog1 = new Dog(test_name_1,2, test_URL_1, test_species_1,test_status_1,test_medical_1,test_intro_1,test_gender_1, test_Date, test_Date, test_Date);
+    Dog dog2 = new Dog(test_name_2, 3, test_URL_2, test_species_1, test_status_2, test_medical_2, test_intro_2,test_gender_1, test_Date,test_Date,test_Date);
+    Dog dog3 = new Dog(test_name_1, 4, test_URL_3, test_species_2, test_status_1,test_medical_1,test_intro_1,test_gender_2,test_Date,test_Date,test_Date);
 
 
     @Autowired

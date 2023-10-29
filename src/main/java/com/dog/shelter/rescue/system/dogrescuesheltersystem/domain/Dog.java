@@ -1,6 +1,9 @@
 package com.dog.shelter.rescue.system.dogrescuesheltersystem.domain;
 
+import net.bytebuddy.asm.Advice;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 public class Dog {
@@ -16,13 +19,16 @@ public class Dog {
     private String MedicalHistory;
     private String intro;
     private String gender;
+    private LocalDateTime EntryDate;
+    private LocalDateTime AdoptedDate;
+    private LocalDateTime LastVaccineDate;
 
 
     public Dog() {
         // Default constructor
     }
 
-    public Dog(String name, int age, String imgURL, String species, String AdoptStatus, String MedicalHistory, String intro, String gender) {
+    public Dog(String name, int age, String imgURL, String species, String AdoptStatus, String MedicalHistory, String intro, String gender, LocalDateTime EntryDate, LocalDateTime AdoptedDate, LocalDateTime LastVaccineDate) {
         this.name = name;
         this.age = age;
         this.imgURL = imgURL;
@@ -31,6 +37,9 @@ public class Dog {
         this.AdoptStatus = AdoptStatus;
         this.species = species;
         this.gender = gender;
+        this.EntryDate = EntryDate;
+        this.AdoptedDate = AdoptedDate;
+        this.LastVaccineDate = LastVaccineDate;
     }
 
     // Getters and setters for all attributes
@@ -113,5 +122,29 @@ public class Dog {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public LocalDateTime getEntryDate() {
+        return EntryDate;
+    }
+
+    public void setEntryDate(LocalDateTime entryDate) {
+        EntryDate = entryDate;
+    }
+
+    public LocalDateTime getAdoptedDate() {
+        return AdoptedDate;
+    }
+
+    public void setAdoptedDate(LocalDateTime adoptedDate) {
+        AdoptedDate = adoptedDate;
+    }
+
+    public LocalDateTime getLastVaccineDate() {
+        return LastVaccineDate;
+    }
+
+    public void setLastVaccineDate(LocalDateTime lastVaccineDate) {
+        LastVaccineDate = lastVaccineDate;
     }
 }

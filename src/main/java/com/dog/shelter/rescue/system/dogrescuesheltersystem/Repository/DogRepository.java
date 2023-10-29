@@ -14,7 +14,7 @@ public interface DogRepository {
     @Select("SELECT * FROM Dog WHERE id = #{id}")
     Dog findById(@Param("id") long id);
 
-    @Insert("INSERT INTO Dog (name, age, imgURL, species, AdoptStatus, MedicalHistory, intro, gender) VALUES (#{name}, #{age}, #{imgURL}, #{species}, #{AdoptStatus}, #{MedicalHistory}, #{intro}, #{gender})")
+    @Insert("INSERT INTO Dog (name, age, imgURL, species, AdoptStatus, MedicalHistory, intro, gender, EntryDate, AdoptedDate, LastVaccineDate) VALUES (#{name}, #{age}, #{imgURL}, #{species}, #{AdoptStatus}, #{MedicalHistory}, #{intro}, #{gender}, #{EntryDate}, #{AdoptedDate}, #{LastVaccineDate})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     Boolean save(Dog dog);
 
@@ -57,6 +57,9 @@ public interface DogRepository {
             "MedicalHistory = #{dog.MedicalHistory}, " +
             "intro = #{dog.intro}, " +
             "gender = #{dog.gender} " +
+            "EntryDate = #{dog.EntryDate}" +
+            "AdoptedDate = #{dog.AdoptedDate}" +
+            "LastVaccineDate = #{dog.LastVaccineDate}" +
             "WHERE id = #{id}")
     boolean updatingDog(@Param("id") long id, @Param("dog") Dog dog);
 
