@@ -23,13 +23,17 @@ public class Dog {
     private LocalDateTime EntryDate;
     private LocalDateTime AdoptedDate;
     private LocalDateTime LastVaccineDate;
+    private LocalDateTime LastUpdateTime;
 
 
     public Dog() {
         // Default constructor
     }
 
-    public Dog(String name, int age, String imgURL, String species, String AdoptStatus, String MedicalHistory, String intro, String gender, LocalDateTime EntryDate, LocalDateTime AdoptedDate, LocalDateTime LastVaccineDate) {
+    public Dog(String name, int age, String imgURL, String species, String AdoptStatus, String MedicalHistory, String intro, String gender, LocalDateTime EntryDate,
+               LocalDateTime AdoptedDate,
+               LocalDateTime LastVaccineDate,
+               LocalDateTime LastUpdateTime) {
         this.name = name;
         this.age = age;
         this.imgURL = imgURL;
@@ -41,6 +45,7 @@ public class Dog {
         this.EntryDate = EntryDate;
         this.AdoptedDate = AdoptedDate;
         this.LastVaccineDate = LastVaccineDate;
+        this.LastUpdateTime = LastUpdateTime;
     }
 
     // Getters and setters for all attributes
@@ -147,5 +152,13 @@ public class Dog {
 
     public void setLastVaccineDate(LocalDateTime lastVaccineDate) {
         LastVaccineDate = lastVaccineDate;
+    }
+
+    public LocalDateTime getLastUpdateTime() {
+        return LastUpdateTime;
+    }
+
+    public void setLastUpdateTime(LocalDateTime lastUpdateTime) {
+        LastUpdateTime = lastUpdateTime;
     }
 }

@@ -36,6 +36,10 @@
             <if test="vaccineStartDate != null and vaccineEndDate != null">
                 and LastVaccineDate between #{vaccineStartDate} and #{vaccineEndDate}
             </if>
+            <if test="lastUpdateTimeStart != null and lastUpdateTimeEnd != null">
+                and LastUpdateTime between #{lastUpdateTimeStart} and #{lastUpdateTimeEnd}
+            </if>
+
         </where>
     </select>
 </mapper>

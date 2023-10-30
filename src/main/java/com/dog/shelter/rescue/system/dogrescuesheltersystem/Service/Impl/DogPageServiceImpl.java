@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -26,7 +27,10 @@ public class DogPageServiceImpl implements DogPageService {
                             LocalDate adoptedStartDate,
                             LocalDate adoptedEndDate,
                             LocalDate vaccineStartDate,
-                            LocalDate vaccineEndDate){
+                            LocalDate vaccineEndDate,
+                            LocalDate lastUpdateTimeStart,
+                            LocalDate lastUpdateTimeEnd
+    ){
 
         PageHelper.startPage(page, pageSize);
 
@@ -36,7 +40,7 @@ public class DogPageServiceImpl implements DogPageService {
                 adoptedStartDate,
                 adoptedEndDate,
                 vaccineStartDate,
-                vaccineEndDate);
+                vaccineEndDate, lastUpdateTimeStart, lastUpdateTimeEnd);
         Page<Dog> dogPage = (Page<Dog>) dogList;
 
         // Encapsulate PageBean
@@ -47,5 +51,10 @@ public class DogPageServiceImpl implements DogPageService {
     @Override
     public void delete(List<Long> ids) {
         dogPageRepository.delete(ids);
+    }
+
+    @Override
+    public void save(Dog dog) {
+        dog.setEntryDate(LocalDateTime.now());
     }
 }

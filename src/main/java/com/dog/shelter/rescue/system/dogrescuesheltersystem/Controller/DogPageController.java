@@ -1,12 +1,13 @@
 package com.dog.shelter.rescue.system.dogrescuesheltersystem.Controller;
 
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.Service.DogPageService;
+import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Dog;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.DogPageBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
-
+import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Result;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class DogPageController {
     private DogPageService dogPageService;
 
     @GetMapping
-    public DogPageBean page(@RequestParam(defaultValue = "1") Integer page,
+    public Result page(@RequestParam(defaultValue = "1") Integer page,
                             @RequestParam(defaultValue = "10") Integer pageSize,
                             Integer age, String gender,
                             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate entryStartDate,
@@ -27,27 +28,41 @@ public class DogPageController {
                             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate adoptedStartDate,
                             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate adoptedEndDate,
                             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate vaccineStartDate,
-                            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate vaccineEndDate){
+                            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate vaccineEndDate,
+                            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate lastUpdateTimeStart,
+                            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate lastUpdateTimeEnd){
         log.info("Page querying with parameter: with page: {} and pageSize: {}, age: {}, gender: {}, " +
-                        "entryDate between {} and {}, adoptedDate between {} and {}, vaccineDate between {} and {}",
+                        "entryDate between {} and {}, adoptedDate between {} and {}, vaccineDate between {} and {}," +
+                        " lastUpdateTime between {} and {}",
                 page, pageSize,
                 age, gender,
                 entryStartDate, entryEndDate,
                 adoptedStartDate,adoptedEndDate,
-                vaccineStartDate, vaccineEndDate);
+                vaccineStartDate, vaccineEndDate,
+                lastUpdateTimeStart, lastUpdateTimeEnd);
 
-        return dogPageService.page(
+        return Result.success(dogPageService.page(
                 page, pageSize,
                 age, gender,
                 entryStartDate, entryEndDate,
                 adoptedStartDate, adoptedEndDate,
-                vaccineStartDate, vaccineEndDate);
+                vaccineStartDate, vaccineEndDate, lastUpdateTimeStart, lastUpdateTimeEnd));
 
     }
 
     @DeleteMapping("/{ids}")
-    public void delete(@PathVariable List<Long> ids){
+    public Result delete(@PathVariable List<Long> ids){
         log.info("Batch removing with id: {}", ids);
         dogPageService.delete(ids);
+        return Result.success();
     }
+
+    public Result save(@RequestBody Dog dog){
+        log.info("Adding dog :{}", dog);
+        dogPageService.save(dog);
+        return Result.success();
+
+    }
+
+
 }

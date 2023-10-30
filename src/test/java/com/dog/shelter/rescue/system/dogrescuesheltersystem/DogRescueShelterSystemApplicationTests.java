@@ -41,9 +41,9 @@ class DogRescueShelterSystemApplicationTests {
     LocalDateTime test_Date = LocalDateTime.now();
 
     /* Only species is same : */
-    Dog dog1 = new Dog(test_name_1,2, test_URL_1, test_species_1,test_status_1,test_medical_1,test_intro_1,test_gender_1, test_Date, test_Date, test_Date);
-    Dog dog2 = new Dog(test_name_2, 3, test_URL_2, test_species_1, test_status_2, test_medical_2, test_intro_2,test_gender_1, test_Date,test_Date,test_Date);
-    Dog dog3 = new Dog(test_name_1, 4, test_URL_3, test_species_2, test_status_1,test_medical_1,test_intro_1,test_gender_2,test_Date,test_Date,test_Date);
+    Dog dog1 = new Dog(test_name_1,2, test_URL_1, test_species_1,test_status_1,test_medical_1,test_intro_1,test_gender_1, test_Date, test_Date, test_Date,test_Date);
+    Dog dog2 = new Dog(test_name_2, 3, test_URL_2, test_species_1, test_status_2, test_medical_2, test_intro_2,test_gender_1, test_Date,test_Date,test_Date,test_Date);
+    Dog dog3 = new Dog(test_name_1, 4, test_URL_3, test_species_2, test_status_1,test_medical_1,test_intro_1,test_gender_2,test_Date,test_Date,test_Date,test_Date);
 
 
     @Autowired

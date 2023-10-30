@@ -1,5 +1,6 @@
 package com.dog.shelter.rescue.system.dogrescuesheltersystem.Service;
 
+import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Dog;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.DogPageBean;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,7 +16,11 @@ public interface DogPageService {
                      LocalDate adoptedStartDate,
                      LocalDate adoptedEndDate,
                      LocalDate vaccineStartDate,
-                     LocalDate vaccineEndDate);
+                     LocalDate vaccineEndDate,
+                     LocalDate lastUpdateTimeStart,
+                     LocalDate lastUpdateTimeEnd);
 
     void delete(List<Long> ids);
+
+    void save(Dog dog);
 }
