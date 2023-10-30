@@ -1,6 +1,7 @@
 package com.dog.shelter.rescue.system.dogrescuesheltersystem.Repository;
 
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Dog;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -23,5 +24,8 @@ public interface DogPageRepository {
                    );
 
     void delete(List<Long> ids);
+
+    @Insert("INSERT INTO Dog (name, age, imgURL, species, AdoptStatus, MedicalHistory, intro, gender, EntryDate, AdoptedDate, LastVaccineDate, LastUpdateTime) VALUES (#{name}, #{age}, #{imgURL}, #{species}, #{AdoptStatus}, #{MedicalHistory}, #{intro}, #{gender}, #{EntryDate}, #{AdoptedDate}, #{LastVaccineDate}, #{LastUpdateTime})")
+    void insert(Dog dog);
 
 }

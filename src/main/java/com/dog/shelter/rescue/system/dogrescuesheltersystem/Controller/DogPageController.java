@@ -57,6 +57,7 @@ public class DogPageController {
         return Result.success();
     }
 
+    @PostMapping("save")
     public Result save(@RequestBody Dog dog){
         log.info("Adding dog :{}", dog);
         dogPageService.save(dog);

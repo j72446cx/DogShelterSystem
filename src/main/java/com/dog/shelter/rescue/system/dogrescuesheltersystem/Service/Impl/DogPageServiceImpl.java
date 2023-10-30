@@ -56,5 +56,7 @@ public class DogPageServiceImpl implements DogPageService {
     @Override
     public void save(Dog dog) {
         dog.setEntryDate(LocalDateTime.now());
+        dog.setLastUpdateTime(LocalDateTime.now());
+        dogPageRepository.insert(dog);
     }
 }
