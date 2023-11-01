@@ -3,7 +3,61 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dog.shelter.rescue.system.dogrescuesheltersystem.Repository.DogPageRepository">
-    
+
+    <update id="edit">
+        update Dog
+            <set>
+        <if test="name != null and name != ''">
+                name = #{name},
+        </if>
+
+        <if test="age != null and age != ''">
+            age = #{age},
+        </if>
+
+        <if test="imgURL != null and imgURL != ''">
+            imgURL = #{imgURL},
+        </if>
+
+        <if test="species != null and species != ''">
+            species = #{species},
+        </if>
+
+        <if test="adoptStatus != null and adoptStatus != ''">
+            adoptStatus = #{adoptStatus},
+        </if>
+
+        <if test="medicalHistory != null and medicalHistory != ''">
+            medicalHistory = #{medicalHistory},
+        </if>
+
+        <if test="intro != null and intro != ''">
+            intro = #{intro},
+        </if>
+
+        <if test="gender != null and gender != ''">
+            gender = #{gender},
+        </if>
+
+        <if test="entryDate != null">
+            entryDate = #{entryDate},
+        </if>
+
+        <if test="adoptedDate != null">
+            adoptedDate = #{adoptedDate},
+        </if>
+
+        <if test="lastVaccineDate != null">
+            lastVaccineDate = #{lastVaccineDate},
+        </if>
+
+        <if test="lastUpdateTime != null">
+            lastUpdateTime = #{lastUpdateTime}
+        </if>
+            </set>
+        where id = #{id}
+    </update>
+
     <delete id="delete">
         delete
         from Dog
@@ -17,12 +71,24 @@
         select *
         from Dog
         <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+
             <if test="age != null">
                 age = #{age}
             </if>
 
-            <if test="gender != null">
-                and gender like concat('%',  #{gender}, '%')
+            <if test="gender != null and gender != ''" >
+                and gender = #{gender}
+            </if>
+
+            <if test="adoptStatus != null and adoptStatus != ''">
+                and adoptStatus = #{adoptStatus}
+            </if>
+
+            <if test="species != null and species != ''">
+                and species = #{species}
             </if>
             
             <if test="entryStartDate != null and entryEndDate != null">

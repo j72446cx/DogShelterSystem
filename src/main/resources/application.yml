@@ -20,7 +20,7 @@ server:
 ---
 
 server:
-  port: 9090
+  port: 1010
 
 spring:
   datasource:

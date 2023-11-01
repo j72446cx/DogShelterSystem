@@ -1,5 +1,5 @@
 
-    function submitForm() {
+function submitForm() {
     const dateInput = document.getElementById("lastVaccineDate").value;
     const dateTimeString = dateInput + 'T00:00:00';
 

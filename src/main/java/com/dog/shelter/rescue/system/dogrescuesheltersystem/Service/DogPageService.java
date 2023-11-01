@@ -10,7 +10,9 @@ import java.util.List;
 
 public interface DogPageService {
 
-    DogPageBean page(Integer page, Integer pageSize,Integer age, String gender,
+    DogPageBean page(Integer page, Integer pageSize,
+                     Long id, String species, String adoptStatus,
+                     Integer age, String gender,
                      LocalDate entryStartDate,
                      LocalDate entryEndDate,
                      LocalDate adoptedStartDate,
@@ -23,4 +25,8 @@ public interface DogPageService {
     void delete(List<Long> ids);
 
     void save(Dog dog);
+
+    void edit(Dog dog);
+
+    Dog getById(Long id);
 }

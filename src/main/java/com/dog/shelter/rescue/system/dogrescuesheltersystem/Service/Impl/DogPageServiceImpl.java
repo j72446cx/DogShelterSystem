@@ -21,7 +21,9 @@ public class DogPageServiceImpl implements DogPageService {
     private DogPageRepository dogPageRepository;
 
     @Override
-    public DogPageBean page(Integer page, Integer pageSize,Integer age, String gender,
+    public DogPageBean page(Integer page, Integer pageSize,
+                            Long id, String species, String adoptStatus,
+                            Integer age, String gender,
                             LocalDate entryStartDate,
                             LocalDate entryEndDate,
                             LocalDate adoptedStartDate,
@@ -34,7 +36,7 @@ public class DogPageServiceImpl implements DogPageService {
 
         PageHelper.startPage(page, pageSize);
 
-        List<Dog> dogList = dogPageRepository.list(age, gender,
+        List<Dog> dogList = dogPageRepository.list(id, species, adoptStatus, age, gender,
                 entryStartDate,
                 entryEndDate,
                 adoptedStartDate,
@@ -58,5 +60,16 @@ public class DogPageServiceImpl implements DogPageService {
         dog.setEntryDate(LocalDateTime.now());
         dog.setLastUpdateTime(LocalDateTime.now());
         dogPageRepository.insert(dog);
+    }
+
+    @Override
+    public void edit(Dog dog){
+        dog.setLastUpdateTime(LocalDateTime.now());
+        dogPageRepository.edit(dog);
+    }
+
+    @Override
+    public Dog getById(Long id){
+        return dogPageRepository.getById(id);
     }
 }

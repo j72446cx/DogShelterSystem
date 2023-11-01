@@ -22,7 +22,8 @@ public class DogPageController {
     @GetMapping
     public Result page(@RequestParam(defaultValue = "1") Integer page,
                             @RequestParam(defaultValue = "10") Integer pageSize,
-                            Integer age, String gender,
+                            Integer age, String gender, Long id,
+                            String species, String adoptStatus,
                             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate entryStartDate,
                             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate entryEndDate,
                             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate adoptedStartDate,
@@ -31,10 +32,10 @@ public class DogPageController {
                             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate vaccineEndDate,
                             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate lastUpdateTimeStart,
                             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate lastUpdateTimeEnd){
-        log.info("Page querying with parameter: with page: {} and pageSize: {}, age: {}, gender: {}, " +
+        log.info("Page querying with parameter: with page: {} and pageSize: {}, id: {}, age: {}, gender: {}, " +
                         "entryDate between {} and {}, adoptedDate between {} and {}, vaccineDate between {} and {}," +
                         " lastUpdateTime between {} and {}",
-                page, pageSize,
+                page, pageSize, id,
                 age, gender,
                 entryStartDate, entryEndDate,
                 adoptedStartDate,adoptedEndDate,
@@ -42,7 +43,7 @@ public class DogPageController {
                 lastUpdateTimeStart, lastUpdateTimeEnd);
 
         return Result.success(dogPageService.page(
-                page, pageSize,
+                page, pageSize, id, species, adoptStatus,
                 age, gender,
                 entryStartDate, entryEndDate,
                 adoptedStartDate, adoptedEndDate,
@@ -50,14 +51,21 @@ public class DogPageController {
 
     }
 
-    @DeleteMapping("/{ids}")
+    @GetMapping("/{ids}")
+    public Result getById(@PathVariable Long ids){
+        log.info("Querying dog by id: {}", ids);
+        Dog dog1 = dogPageService.getById(ids);
+        return Result.success(dog1);
+    }
+
+    @DeleteMapping("delete/{ids}")
     public Result delete(@PathVariable List<Long> ids){
         log.info("Batch removing with id: {}", ids);
         dogPageService.delete(ids);
         return Result.success();
     }
 
-    @PostMapping("save")
+    @PostMapping("/save")
     public Result save(@RequestBody Dog dog){
         log.info("Adding dog :{}", dog);
         dogPageService.save(dog);
@@ -65,5 +73,11 @@ public class DogPageController {
 
     }
 
+    @PutMapping("/edit")
+    public Result edit(@RequestBody Dog dog){
+        log.info("Editing dog: {}", dog);
+        dogPageService.edit(dog);
+        return Result.success();
+    }
 
 }
