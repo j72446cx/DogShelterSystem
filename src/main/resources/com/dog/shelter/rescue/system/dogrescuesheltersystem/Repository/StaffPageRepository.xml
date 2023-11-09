@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dog.shelter.rescue.system.dogrescuesheltersystem.Repository.StaffPageRepository">
+
+    <update id="edit">
+        update Staff
+        <set>
+            <if test="age != null">
+                age = #{age},
+            </if>
+
+            <if test="gender != null and gender != ''">
+                gender = #{gender},
+            </if>
+
+            <if test="firstName != null and firstName != ''">
+                firstName = #{firstName},
+            </if>
+
+            <if test="lastName != null and lastName != ''">
+                lastName = #{lastName},
+            </if>
+
+            <if test="middleName != null and middleName != ''">
+                middleName = #{middleName},
+            </if>
+
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+
+            <if test="phoneNumber != null and phoneNumber != ''">
+                phoneNumber = #{phoneNumber},
+            </if>
+
+
+            <if test="identification != null and identification != ''">
+                identification = #{identification},
+            </if>
+
+            <if test="postCode != null and postCode != ''">
+                postCode = #{postCode},
+            </if>
+
+            <if test="role != null and role != ''">
+                role = #{role},
+            </if>
+
+            <if test="entryDate != null">
+                entryDate = #{entryDate},
+            </if>
+
+            <if test="contractStartDate != null">
+                contractStartDate = #{contractStartDate},
+            </if>
+
+            <if test="contractEndDate != null">
+                contractEndDate = #{contractEndDate},
+            </if>
+
+            <if test="lastUpdateTime != null">
+                lastUpdateTime = #{lastUpdateTime},
+            </if>
+
+            <if test="dateOfBirth != null">
+                dateOfBirth = #{dateOfBirth},
+            </if>
+
+            <if test="contractImg != null and contractImg != ''">
+                contractImg = #{contractImg},
+            </if>
+
+            <if test="identityPhoto != null and identityPhoto != ''">
+                identityPhoto = #{identityPhoto},
+            </if>
+
+            <if test="avatar != null and avatar != ''">
+                avatar = #{avatar},
+            </if>
+
+            <if test="dateOfBirth != null">
+                dateOfBirth = #{dateOfBirth},
+            </if>
+
+            <if test="emergency_Contact != null">
+                emergency_Contact = #{emergency_Contact},
+            </if>
+
+            <if test="salary != null">
+                salary = #{salary}
+            </if>
+
+
+
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <delete id="delete">
+        delete
+        from Staff
+        where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="list" resultType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Staff">
+        select * from Staff
+        <where>
+            <if test="id != null and id != 0">
+                id = #{id}
+            </if>
+
+            <if test="age != null and age != 0">
+                age = #{age}
+            </if>
+
+            <if test="firstName != null and firstName != ''">
+                and firstName = #{firstName}
+            </if>
+
+            <if test="lastName != null and lastName != ''">
+                and lastName = #{lastName}
+            </if>
+
+            <if test="middleName != null and middleName != ''">
+                and middleName = #{middleName}
+            </if>
+
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+
+            <if test="phoneNumber != null and phoneNumber != ''">
+                and phoneNumber = #{phoneNumber}
+            </if>
+
+
+            <if test="identification != null and identification != ''">
+                and identification = #{identification}
+            </if>
+
+            <if test="postCode != null and postCode != ''">
+                and postCode = #{postCode}
+            </if>
+
+            <if test="role != null and role != ''">
+                and role = #{role}
+            </if>
+
+            <if test="entryStartDate != null and entryEndDate != null">
+                and entryDate between #{entryStartDate} and #{entryEndDate}
+            </if>
+
+            <if test="contractStartStartDate != null and contractStartEndDate != null">
+                and contractStartDate between #{contractStartStartDate} and #{contractStartEndDate}
+            </if>
+
+            <if test="contractEndStartDate != null and contractEndEndDate != null">
+                and contractEndDate between #{contractEndStartDate} and #{contractEndEndDate}
+            </if>
+
+            <if test="lastUpdateTimeStart != null and lastUpdateTimeEnd != null">
+                and lastUpdateTime between #{lastUpdateTimeStart} and #{lastUpdateTimeEnd}
+            </if>
+
+            <if test="dateOfBirthStart != null and dateOfBirthEnd != null">
+                and dateOfBirth between #{dateOfBirthStart} and #{dateOfBirthEnd}
+            </if>
+
+            <if test="gender != null and gender != ''">
+                and gender = #{gender}
+            </if>
+
+        </where>
+    </select>
+</mapper>
