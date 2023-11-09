@@ -2,7 +2,6 @@ package com.dog.shelter.rescue.system.dogrescuesheltersystem.Service.Impl;
 
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.Repository.DogPageRepository;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.Service.DogPageService;
-import com.dog.shelter.rescue.system.dogrescuesheltersystem.Service.DogService;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Dog;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.DogPageBean;
 import com.github.pagehelper.Page;
