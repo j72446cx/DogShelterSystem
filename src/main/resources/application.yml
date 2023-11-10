@@ -39,4 +39,10 @@ spring:
     hibernate:
       use-new-id-generator-mappings: false
 
+aliyun:
+  oss:
+    endpoint: https://oss-eu-west-1.aliyuncs.com
+    accessKeyId: LTAI5tAuHfoTvgbcbij4px3d
+    accessKeySecret: RbUesjwGoiJhjV3b54Hl9WoW6yCy6F
+    bucketName: dog-shelter-system
 
