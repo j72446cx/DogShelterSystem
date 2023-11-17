@@ -1,0 +1,185 @@
+create table Dog
+(
+    id              int unsigned auto_increment
+        primary key,
+    name            varchar(255) null,
+    age             int          null,
+    imgURL          varchar(255) null,
+    species         varchar(255) null,
+    AdoptStatus     varchar(255) null,
+    MedicalHistory  varchar(255) null,
+    intro           varchar(255) null,
+    gender          varchar(255) null,
+    EntryDate       date         null,
+    AdoptedDate     date         null,
+    LastVaccineDate date         null,
+    LastUpdateTime  datetime     null,
+    lastFeedTime    datetime     null,
+    constraint Dog_id_uindex
+        unique (id)
+);
+
+create table Staff
+(
+    id                int unsigned auto_increment
+        primary key,
+    age               int          null,
+    firstName         varchar(255) not null,
+    lastName          varchar(255) not null,
+    middleName        varchar(255) null,
+    email             varchar(255) null,
+    phoneNumber       varchar(255) null,
+    address           varchar(255) null,
+    postCode          varchar(255) null,
+    role              varchar(255) null,
+    dateOfBirth       date         null,
+    gender            varchar(255) not null,
+    entryDate         datetime     null,
+    salary            float        null,
+    emergency_Contact varchar(255) null,
+    avatar            varchar(255) null,
+    contractStartDate datetime     null,
+    contractEndDate   datetime     null,
+    username          varchar(255) null,
+    password          varchar(255) null,
+    contractImg       varchar(255) null,
+    identityPhoto     varchar(255) null,
+    identification    varchar(255) null,
+    lastUpdateTime    datetime     null,
+    constraint Staff_email_uindex
+        unique (email),
+    constraint Staff_id_uindex
+        unique (id)
+);
+
+create table behavior_log
+(
+    id                 int auto_increment
+        primary key,
+    dog_id             int unsigned null,
+    staff_id           int unsigned null,
+    observe_date       datetime     null,
+    behavior_notes     text         null,
+    additional_comment text         null,
+    constraint behavior_log_ibfk_1
+        foreign key (staff_id) references Staff (id),
+    constraint behavior_log_ibfk_2
+        foreign key (dog_id) references Dog (id)
+);
+
+create index dog_id
+    on behavior_log (dog_id);
+
+create index staff_id
+    on behavior_log (staff_id);
+
+create table exercise_log
+(
+    id           int auto_increment
+        primary key,
+    dog_id       int unsigned null,
+    staff_id     int unsigned null,
+    duration     varchar(255) null,
+    date         datetime     null,
+    exerciseType varchar(255) null,
+    notes        text         null,
+    constraint exercise_log_ibfk_1
+        foreign key (staff_id) references Staff (id),
+    constraint exercise_log_ibfk_2
+        foreign key (dog_id) references Dog (id)
+);
+
+create index dog_id
+    on exercise_log (dog_id);
+
+create index staff_id
+    on exercise_log (staff_id);
+
+create table feeding_log
+(
+    id           int auto_increment
+        primary key,
+    dog_id       int unsigned   null,
+    feeding_time datetime       null,
+    food_type    varchar(255)   null,
+    quantity     decimal(10, 2) null,
+    staff_id     int unsigned   null,
+    notes        text           null,
+    constraint feeding_log_ibfk_1
+        foreign key (dog_id) references Dog (id),
+    constraint feeding_log_ibfk_2
+        foreign key (staff_id) references Staff (id)
+);
+
+create index dog_id
+    on feeding_log (dog_id);
+
+create index staff_id
+    on feeding_log (staff_id);
+
+create table grooming_log
+(
+    id            int auto_increment
+        primary key,
+    dog_id        int unsigned null,
+    staff_id      int unsigned null,
+    grooming_date datetime     null,
+    type          varchar(255) null,
+    notes         text         null,
+    constraint grooming_log_ibfk_1
+        foreign key (staff_id) references Staff (id),
+    constraint grooming_log_ibfk_2
+        foreign key (dog_id) references Dog (id)
+);
+
+create index dog_id
+    on grooming_log (dog_id);
+
+create index staff_id
+    on grooming_log (staff_id);
+
+create table health_log
+(
+    id            int auto_increment
+        primary key,
+    dog_id        int unsigned null,
+    checkup_date  datetime     null,
+    weight        decimal      null,
+    staff_id      int unsigned null,
+    health_status text         null,
+    notes         text         null,
+    constraint health_log_ibfk_1
+        foreign key (dog_id) references Dog (id),
+    constraint health_log_ibfk_2
+        foreign key (staff_id) references Staff (id)
+);
+
+create index dog_id
+    on health_log (dog_id);
+
+create index staff_id
+    on health_log (staff_id);
+
+create table medication_log
+(
+    id              int auto_increment
+        primary key,
+    dog_id          int unsigned null,
+    staff_id        int unsigned null,
+    medication_name varchar(255) null,
+    startDate       datetime     null,
+    endDate         datetime     null,
+    notes           text         null,
+    dosage          varchar(20)  null,
+    constraint medication_log_ibfk_1
+        foreign key (staff_id) references Staff (id),
+    constraint medication_log_ibfk_2
+        foreign key (dog_id) references Dog (id)
+);
+
+create index dog_id
+    on medication_log (dog_id);
+
+create index staff_id
+    on medication_log (staff_id);
+
