@@ -1,3 +1,5 @@
+#do not submit this file onto public Github repository since the sensitive information
+
 spring:
   profiles:
     active: test  # Set the active profile to 'prod' for production

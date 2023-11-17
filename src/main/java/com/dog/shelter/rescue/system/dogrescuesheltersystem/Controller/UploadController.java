@@ -22,7 +22,6 @@ public class UploadController {
         log.info("Image upload: {} ", image.getOriginalFilename());
         String url = aliOSSUtils.upload(image);
         log.info("Image upload successfully, with url: {}", url);
-
         return Result.success(url);
 
     }

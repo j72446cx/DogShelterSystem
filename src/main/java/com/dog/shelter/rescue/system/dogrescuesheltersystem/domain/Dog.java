@@ -24,6 +24,7 @@ public class Dog {
     private LocalDateTime AdoptedDate;
     private LocalDateTime LastVaccineDate;
     private LocalDateTime LastUpdateTime;
+    private LocalDateTime lastFeedTime;
 
 
     public Dog() {
@@ -33,7 +34,8 @@ public class Dog {
     public Dog(String name, int age, String imgURL, String species, String AdoptStatus, String MedicalHistory, String intro, String gender, LocalDateTime EntryDate,
                LocalDateTime AdoptedDate,
                LocalDateTime LastVaccineDate,
-               LocalDateTime LastUpdateTime) {
+               LocalDateTime LastUpdateTime,
+               LocalDateTime lastFeedTime) {
         this.name = name;
         this.age = age;
         this.imgURL = imgURL;
@@ -46,6 +48,7 @@ public class Dog {
         this.AdoptedDate = AdoptedDate;
         this.LastVaccineDate = LastVaccineDate;
         this.LastUpdateTime = LastUpdateTime;
+        this.lastFeedTime = lastFeedTime;
     }
 
     // Getters and setters for all attributes
@@ -160,5 +163,13 @@ public class Dog {
 
     public void setLastUpdateTime(LocalDateTime lastUpdateTime) {
         LastUpdateTime = lastUpdateTime;
+    }
+
+    public LocalDateTime getLastFeedTime() {
+        return lastFeedTime;
+    }
+
+    public void setLastFeedTime(LocalDateTime lastFeedTime) {
+        this.lastFeedTime = lastFeedTime;
     }
 }

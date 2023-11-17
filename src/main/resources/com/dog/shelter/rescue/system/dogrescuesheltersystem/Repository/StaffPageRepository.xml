@@ -89,7 +89,11 @@
             </if>
 
             <if test="salary != null">
-                salary = #{salary}
+                salary = #{salary},
+            </if>
+
+            <if test="identityPhoto != null and identityPhoto != ''">
+                identityPhoto = #{identityPhoto}
             </if>
 
 

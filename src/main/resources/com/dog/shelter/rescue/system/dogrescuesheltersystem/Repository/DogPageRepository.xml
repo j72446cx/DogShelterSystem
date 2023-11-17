@@ -4,6 +4,33 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dog.shelter.rescue.system.dogrescuesheltersystem.Repository.DogPageRepository">
 
+    <insert id="feed" parameterType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Request.FeedingRequest">
+        insert into feeding_log(dog_id, staff_id, feeding_time, food_type, quantity, notes)
+        values (#{dog_id}, #{staff_id}, #{feeding_time}, #{food_type}, #{quantity}, #{notes})
+    </insert>
+
+    <insert id="exercise" parameterType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Request.ExerciseRequest">
+        insert into exercise_log(dog_id, staff_id, duration, date, exerciseType, notes)
+        values (#{dog_id}, #{staff_id}, #{duration}, #{date}, #{exerciseType}, #{notes})
+    </insert>
+
+    <insert id="grooming" parameterType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Request.GroomingRequest">
+        insert into grooming_log(dog_id, staff_id, grooming_date, type, notes)
+        values (#{dog_id}, #{staff_id},#{grooming_date}, #{type}, #{notes})
+    </insert>
+
+    <insert id="health" parameterType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Request.HealthRequest">
+        insert into health_log(dog_id, staff_id, checkup_date, weight, health_status,notes)
+        values (#{dog_id}, #{staff_id},#{checkup_date}, #{weight}, #{health_status}, #{notes})
+    </insert>
+
+    <insert id="medication" parameterType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Request.MedicationRequest">
+        insert into medication_log(dog_id, staff_id, startDate, endDate, dosage, notes, medication_name)
+        values (#{dog_id}, #{staff_id},#{startDate}, #{endDate}, #{dosage}, #{notes}, #{medication_name})
+    </insert>
+
+
+
     <update id="edit">
         update Dog
             <set>
@@ -66,6 +93,83 @@
             #{id}
         </foreach>
     </delete>
+
+    <select id="getFeed" resultType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Request.FeedingRequest">
+        select * from feeding_log
+        <where>
+            <if test="dog_id != null">
+                dog_id = #{dog_id}
+            </if>
+
+            <if test="staff_id != null">
+                and staff_id = #{staff_id}
+            </if>
+
+            <if test="feeding_time_start != null and feeding_time_end != null">
+                and feeding_time between #{feeding_time_start} and #{feeding_time_end}
+            </if>
+        </where>
+    </select>
+
+    <select id="getGrooming" resultType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Request.GroomingRequest">
+        select * from grooming_log
+        <where>
+            <if test="dog_id != null">
+                dog_id = #{dog_id}
+            </if>
+
+            <if test="staff_id != null">
+                and staff_id = #{staff_id}
+            </if>
+
+            <if test="grooming_time_start != null and grooming_time_end != null">
+                and grooming_date between #{grooming_time_start} and #{grooming_time_end}
+            </if>
+        </where>
+    </select>
+
+    <select id="getExercise" resultType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Request.ExerciseRequest">
+        select * from exercise_log
+        <where>
+            <if test="dog_id != null">
+                dog_id = #{dog_id}
+            </if>
+
+            <if test="staff_id != null">
+                and staff_id = #{staff_id}
+            </if>
+
+            <if test="exercise_time_start != null and exercise_time_end != null">
+                and date between #{exercise_time_start} and #{exercise_time_end}
+            </if>
+        </where>
+    </select>
+
+    <select id="getMedication" resultType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Request.MedicationRequest">
+        select * from medication_log
+        <where>
+            <if test="dog_id != null">
+                dog_id = #{dog_id}
+            </if>
+
+            <if test="staff_id != null">
+                and staff_id = #{staff_id}
+            </if>
+
+            <if test="dosage != null and dosage != ''">
+                and dosage = #{dosage}
+            </if>
+
+            <if test="notes != null and notes != ''">
+                and notes = #{notes}
+            </if>
+            <if test="medication_time_start != null and medication_time_end != null">
+                and startDate between #{medication_time_start} and #{medication_time_end}
+            </if>
+        </where>
+    </select>
+
+
 
     <select id="list" resultType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Dog">
         select *

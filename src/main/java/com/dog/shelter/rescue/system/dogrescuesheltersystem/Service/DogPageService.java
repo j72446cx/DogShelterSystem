@@ -1,11 +1,10 @@
 package com.dog.shelter.rescue.system.dogrescuesheltersystem.Service;
 
-import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Dog;
-import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.DogPageBean;
-import org.apache.ibatis.annotations.Select;
-import org.springframework.format.annotation.DateTimeFormat;
+import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.*;
+import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Request.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface DogPageService {
@@ -29,4 +28,21 @@ public interface DogPageService {
     void edit(Dog dog);
 
     Dog getById(Long id);
+
+    void feed(FeedingRequest feedingRequest);
+
+    void exercise(ExerciseRequest exerciseRequest);
+
+    void grooming(GroomingRequest groomingRequest);
+
+    void health(HealthRequest healthRequest);
+
+    void medication(MedicationRequest medicationRequest);
+
+    DogPageBean getFeed(Integer page, Integer pageSize, Long dog_id, Long staff_id, LocalDate feeding_time_start, LocalDate feeding_time_end);
+
+    DogPageBean getGrooming(Integer page, Integer pageSize, Long dog_id, Long staff_id, LocalDate grooming_time_start, LocalDate grooming_time_end);
+
+    DogPageBean getExercise(Integer page, Integer pageSize,Long dog_id, Long staff_id, LocalDate exercise_time_start, LocalDate exercise_time_end);
+    DogPageBean getMedication(Integer page, Integer pageSize,Long dog_id, Long staff_id, String dosage,LocalDate medication_time_start, LocalDate medication_time_end, String notes);
 }
