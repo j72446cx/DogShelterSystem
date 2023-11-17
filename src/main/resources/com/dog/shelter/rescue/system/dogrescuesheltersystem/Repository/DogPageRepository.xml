@@ -85,6 +85,42 @@
         where id = #{id}
     </update>
 
+    <delete id="deleteExercise">
+        delete
+        from exercise_log
+        where dog_id in
+        <foreach collection="ids" item="dog_id" separator="," open="(" close=")">
+            #{dog_id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteFeeding">
+        delete
+        from feeding_log
+        where dog_id in
+        <foreach collection="ids" item="dog_id" separator="," open="(" close=")">
+            #{dog_id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteGrooming">
+        delete
+        from grooming_log
+        where dog_id in
+        <foreach collection="ids" item="dog_id" separator="," open="(" close=")">
+            #{dog_id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteMedication">
+        delete
+        from medication_log
+        where dog_id in
+        <foreach collection="ids" item="dog_id" separator="," open="(" close=")">
+            #{dog_id}
+        </foreach>
+    </delete>
+
     <delete id="delete">
         delete
         from Dog
@@ -92,6 +128,7 @@
         <foreach collection="ids" item="id" separator="," open="(" close=")">
             #{id}
         </foreach>
+
     </delete>
 
     <select id="getFeed" resultType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Request.FeedingRequest">

@@ -45,4 +45,12 @@ public interface DogPageService {
 
     DogPageBean getExercise(Integer page, Integer pageSize,Long dog_id, Long staff_id, LocalDate exercise_time_start, LocalDate exercise_time_end);
     DogPageBean getMedication(Integer page, Integer pageSize,Long dog_id, Long staff_id, String dosage,LocalDate medication_time_start, LocalDate medication_time_end, String notes);
+
+    void deleteExercise(List<Long> ids);
+
+    void deleteGrooming(List<Long> ids);
+
+    void deleteMedication(List<Long> ids);
+
+    void deleteFeeding(List<Long> ids);
 }

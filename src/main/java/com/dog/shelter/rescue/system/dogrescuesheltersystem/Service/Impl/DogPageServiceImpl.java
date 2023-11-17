@@ -9,6 +9,7 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -50,7 +51,24 @@ public class DogPageServiceImpl implements DogPageService {
     }
 
     @Override
+    public void deleteExercise(List<Long> ids){dogPageRepository.deleteExercise(ids);}
+
+    @Override
+    public void deleteGrooming(List<Long> ids){dogPageRepository.deleteGrooming(ids);}
+
+    @Override
+    public void deleteFeeding(List<Long> ids){dogPageRepository.deleteFeeding(ids);}
+
+    @Override
+    public void deleteMedication(List<Long> ids){dogPageRepository.deleteMedication(ids);}
+
+    @Transactional
+    @Override
     public void delete(List<Long> ids) {
+        dogPageRepository.deleteFeeding(ids);
+        dogPageRepository.deleteGrooming(ids);
+        dogPageRepository.deleteMedication(ids);
+        dogPageRepository.deleteExercise(ids);
         dogPageRepository.delete(ids);
     }
 
@@ -97,6 +115,7 @@ public class DogPageServiceImpl implements DogPageService {
     public void medication(MedicationRequest medicationRequest){
         dogPageRepository.medication(medicationRequest);
     }
+
 
     @Override
     public DogPageBean getFeed(Integer page, Integer pageSize, Long dog_id, Long staff_id, LocalDate feeding_time_start, LocalDate feeding_time_end) {

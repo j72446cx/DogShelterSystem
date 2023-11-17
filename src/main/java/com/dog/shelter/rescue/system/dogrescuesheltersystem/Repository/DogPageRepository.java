@@ -53,4 +53,12 @@ public interface DogPageRepository {
     List<ExerciseRequest> getExercise(Long dog_id, Long staff_id, LocalDate exercise_time_start, LocalDate exercise_time_end);
 
     List<MedicationRequest> getMedication(Long dog_id, Long staff_id, String dosage, LocalDate medication_time_start, LocalDate medication_time_end, String notes);
+
+    void deleteExercise(List<Long> ids);
+
+    void deleteGrooming(List<Long> ids);
+
+    void deleteFeeding(List<Long> ids);
+
+    void deleteMedication(List<Long> ids);
 }

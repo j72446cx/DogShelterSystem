@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -67,6 +68,36 @@ public class DogStaffInteractionController {
 
         return Result.success(dogPageService.getMedication(page, pageSize,dog_id, staff_id, dosage,medication_time_start, medication_time_end, notes));
     }
+
+    @DeleteMapping("/deleteExercise/{ids}")
+    public Result deleteExercise(@PathVariable List<Long> ids){
+        log.info("removing from exercise with dog_id: {} ", ids);
+        dogPageService.deleteExercise(ids);
+        return Result.success();
+    }
+
+    @DeleteMapping("/deleteGrooming/{ids}")
+    public Result deleteGrooming(@PathVariable List<Long> ids){
+        log.info("removing from Grooming with dog_id: {} ", ids);
+        dogPageService.deleteGrooming(ids);
+        return Result.success();
+    }
+
+    @DeleteMapping("/deleteMedication/{ids}")
+    public Result deleteMedication(@PathVariable List<Long> ids){
+        log.info("removing from Medication with dog_id: {} ", ids);
+        dogPageService.deleteMedication(ids);
+        return Result.success();
+    }
+
+    @DeleteMapping("/deleteFeeding/{ids}")
+    public Result deleteFeeding(@PathVariable List<Long> ids){
+        log.info("removing from Feeding with dog_id: {} ", ids);
+        dogPageService.deleteFeeding(ids);
+        return Result.success();
+    }
+
+
 
 
 
