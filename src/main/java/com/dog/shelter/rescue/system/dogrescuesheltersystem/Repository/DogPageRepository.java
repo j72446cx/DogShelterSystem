@@ -3,6 +3,7 @@ package com.dog.shelter.rescue.system.dogrescuesheltersystem.Repository;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Dog;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.DogPageBean;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Request.*;
+import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Staff;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -10,6 +11,7 @@ import org.apache.ibatis.annotations.Select;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Mapper
 public interface DogPageRepository {
@@ -61,4 +63,9 @@ public interface DogPageRepository {
     void deleteFeeding(List<Long> ids);
 
     void deleteMedication(List<Long> ids);
+
+
+
+    @Select("SELECT s.* FROM Staff s INNER JOIN Staff_Dog sd ON s.id = sd.staff_id WHERE sd.dog_id = #{id}")
+    List<Staff> dogGetStaff(Long id);
 }

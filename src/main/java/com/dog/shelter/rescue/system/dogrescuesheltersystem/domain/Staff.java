@@ -4,6 +4,8 @@ package com.dog.shelter.rescue.system.dogrescuesheltersystem.domain;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Staff {
@@ -35,20 +37,19 @@ public class Staff {
     private String identification;
     private LocalDateTime lastUpdateTime;
 
+
+    @ManyToMany
+    @JoinTable(
+            name = "Staff_Dog",
+            joinColumns = @JoinColumn(name = "staff_id"),
+            inverseJoinColumns = @JoinColumn(name = "dog_id")
+    )
+    private Set<Dog> dogs = new HashSet<>();
+
     public Staff(){};
 
-    public Staff(String firstName, String lastName,
-                 String middleName, String gender,
-                Integer age, String email,
-                 String phoneNumber, String address,
-                 String postCode, String role,
-                 LocalDateTime dateOfBirth, LocalDateTime entryDate,
-                 LocalDateTime contractStartDate, LocalDateTime contractEndDate,
-                 Float salary, String emergency_Contact,
-                 String avatar, String identityPhoto, String contractImg,
-                 String username, String password, String identification,
-                 LocalDateTime lastUpdateTime){
-
+    public Staff(long id, int age, String firstName, String lastName, String middleName, String email, String phoneNumber, String address, String postCode, String role, LocalDateTime dateOfBirth, String gender, LocalDateTime entryDate, float salary, String emergency_Contact, String avatar, LocalDateTime contractStartDate, LocalDateTime contractEndDate, String username, String password, String contractImg, String identityPhoto, String identification, LocalDateTime lastUpdateTime, Set<Dog> dogs) {
+        this.id = id;
         this.age = age;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -72,7 +73,10 @@ public class Staff {
         this.identityPhoto = identityPhoto;
         this.identification = identification;
         this.lastUpdateTime = lastUpdateTime;
+        this.dogs = dogs;
     }
+
+
 
     public long getId() {
         return id;

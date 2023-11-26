@@ -1,5 +1,6 @@
 package com.dog.shelter.rescue.system.dogrescuesheltersystem.Service;
 
+import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Dog;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.DogPageBean;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Staff;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.StaffPageBean;
@@ -20,7 +21,7 @@ public interface StaffPageService {
                        LocalDate contractStartStartDate, LocalDate contractStartEndDate,
                        LocalDate contractEndStartDate, LocalDate contractEndEndDate,
                        LocalDate lastUpdateTimeStart, LocalDate lastUpdateTimeEnd,
-                       LocalDate dateOfBirthStart, LocalDate dateOfBirthEnd);
+                       LocalDate dateOfBirthStart, LocalDate dateOfBirthEnd, String username);
 
     void delete(List<Long> ids);
 
@@ -29,4 +30,6 @@ public interface StaffPageService {
     Staff getById(Long id);
 
     Staff login(Staff staff);
+
+    List<Dog> staffGetDog(Long id);
 }

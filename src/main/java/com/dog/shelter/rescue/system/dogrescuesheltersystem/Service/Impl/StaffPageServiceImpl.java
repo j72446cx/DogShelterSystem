@@ -29,6 +29,11 @@ public class StaffPageServiceImpl implements StaffPageService{
     }
 
     @Override
+    public List<Dog> staffGetDog(Long id){
+        return staffPageRepository.staffGetDog(id);
+    }
+
+    @Override
     public StaffPageBean page(Integer page, Integer pageSize,
                               Long id, Integer age,
                               String firstName, String lastName, String middleName, String gender,
@@ -38,7 +43,7 @@ public class StaffPageServiceImpl implements StaffPageService{
                               LocalDate contractStartStartDate, LocalDate contractStartEndDate,
                               LocalDate contractEndStartDate, LocalDate contractEndEndDate,
                               LocalDate lastUpdateTimeStart, LocalDate lastUpdateTimeEnd,
-                              LocalDate dateOfBirthStart, LocalDate dateOfBirthEnd){
+                              LocalDate dateOfBirthStart, LocalDate dateOfBirthEnd, String username){
 
         PageHelper.startPage(page, pageSize);
         List<Staff> staffList =  staffPageRepository.list(id, age, firstName, lastName, middleName, gender,
@@ -46,7 +51,7 @@ public class StaffPageServiceImpl implements StaffPageService{
                 entryStartDate, entryEndDate,
                 contractStartStartDate, contractStartEndDate,
                 contractEndStartDate, contractEndEndDate,
-                lastUpdateTimeStart, lastUpdateTimeEnd, dateOfBirthStart, dateOfBirthEnd);
+                lastUpdateTimeStart, lastUpdateTimeEnd, dateOfBirthStart, dateOfBirthEnd, username);
 
         Page<Staff> staffPage = (Page<Staff>) staffList;
 

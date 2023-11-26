@@ -25,6 +25,7 @@ public class StaffPageController {
     @GetMapping
     public Result page(@RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer pageSize,
+                       String username,
                        Long id, Integer age,
                        String firstName, String lastName, String middleName, String gender,
                        String identification,
@@ -43,14 +44,14 @@ public class StaffPageController {
         log.info("Page querying with parameter: with page: {} and pageSize: {}, id: {}, age: {}, gender: {}, " +
                 "email: {}, firstname: {}, lastname: {}, middle name: {}, phone number: {}, postcode: {}, " +
                 "role: {}, entryDate between {} and {}, contract start date between {} and {}, contract end date between {} and {} "+
-                "last update between {} and {}, date of birth between {} and {}",
+                "last update between {} and {}, date of birth between {} and {}, username : {}",
                 page, pageSize, id, age, gender, email, firstName, lastName, middleName, phoneNumber, postCode,
                 role, entryStartDate, entryEndDate, contractStartStartDate, contractStartEndDate, contractEndStartDate, contractEndEndDate,
-                lastUpdateTimeStart, lastUpdateTimeEnd, dateOfBirthStart, dateOfBirthEnd);
+                lastUpdateTimeStart, lastUpdateTimeEnd, dateOfBirthStart, dateOfBirthEnd, username);
 
         return Result.success(staffPageService.page(page, pageSize, id, age, firstName, lastName, middleName, gender, identification,
                 email, phoneNumber, postCode, role, entryStartDate, entryEndDate, contractStartStartDate, contractStartEndDate, contractEndStartDate, contractEndEndDate,
-                lastUpdateTimeStart, lastUpdateTimeEnd, dateOfBirthStart, dateOfBirthEnd));
+                lastUpdateTimeStart, lastUpdateTimeEnd, dateOfBirthStart, dateOfBirthEnd, username));
     }
 
     @GetMapping("/{ids}")
@@ -62,7 +63,7 @@ public class StaffPageController {
 
     @PostMapping("/save")
     public Result save(@RequestBody Staff staff){
-        log.info("Adding dog :{}", staff);
+        log.info("Adding staff :{}", staff);
         staffPageService.save(staff);
         return Result.success();
 

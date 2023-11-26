@@ -24,7 +24,7 @@ public interface StaffPageRepository {
                      LocalDate contractStartStartDate, LocalDate contractStartEndDate,
                      LocalDate contractEndStartDate, LocalDate contractEndEndDate,
                      LocalDate lastUpdateTimeStart, LocalDate lastUpdateTimeEnd,
-                     LocalDate dateOfBirthStart, LocalDate dateOfBirthEnd);
+                     LocalDate dateOfBirthStart, LocalDate dateOfBirthEnd, String username);
 
     void delete(List<Long> ids);
 
@@ -35,4 +35,7 @@ public interface StaffPageRepository {
 
     @Select("select * from Staff where username = #{username} and password = #{password}")
     Staff getByUsernameAndPassword(Staff staff);
+
+    @Select("SELECT d.* FROM Dog d INNER JOIN Staff_Dog sd ON d.id = sd.dog_id WHERE sd.staff_id = #{id}")
+    List<Dog> staffGetDog(Long id);
 }

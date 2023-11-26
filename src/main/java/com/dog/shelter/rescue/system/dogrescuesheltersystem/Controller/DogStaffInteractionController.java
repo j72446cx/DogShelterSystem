@@ -1,6 +1,7 @@
 package com.dog.shelter.rescue.system.dogrescuesheltersystem.Controller;
 
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.Service.DogPageService;
+import com.dog.shelter.rescue.system.dogrescuesheltersystem.Service.StaffPageService;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.*;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Request.*;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,9 @@ public class DogStaffInteractionController {
 
     @Autowired
     private DogPageService dogPageService;
+
+    @Autowired
+    private StaffPageService staffPageService;
 
     @GetMapping("/getFeed")
     public Result getFeed(
@@ -69,6 +73,19 @@ public class DogStaffInteractionController {
         return Result.success(dogPageService.getMedication(page, pageSize,dog_id, staff_id, dosage,medication_time_start, medication_time_end, notes));
     }
 
+    @GetMapping("/staffGetDog/{id}")
+    public Result staffGetDog(@PathVariable Long id){
+        log.info("staff with id : {} getting dogs", id);
+        return Result.success(staffPageService.staffGetDog(id));
+    }
+
+    @GetMapping("/dogGetStaff/{id}")
+    public Result dogGetStaff(@PathVariable Long id){
+        log.info("staff with id : {} getting dogs", id);
+        return Result.success(dogPageService.dogGetStaff(id));
+    }
+
+
     @DeleteMapping("/deleteExercise/{ids}")
     public Result deleteExercise(@PathVariable List<Long> ids){
         log.info("removing from exercise with dog_id: {} ", ids);
@@ -96,10 +113,6 @@ public class DogStaffInteractionController {
         dogPageService.deleteFeeding(ids);
         return Result.success();
     }
-
-
-
-
 
     @PostMapping("/feed")
     public Result feed(@RequestBody FeedingRequest feedingRequest){

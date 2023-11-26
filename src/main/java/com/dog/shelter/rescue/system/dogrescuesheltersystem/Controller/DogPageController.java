@@ -69,7 +69,6 @@ public class DogPageController {
         log.info("Adding dog :{}", dog);
         dogPageService.save(dog);
         return Result.success();
-
     }
 
     @PutMapping("/edit")

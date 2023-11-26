@@ -5,6 +5,8 @@ import net.bytebuddy.asm.Advice;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Dog {
@@ -26,31 +28,39 @@ public class Dog {
     private LocalDateTime LastUpdateTime;
     private LocalDateTime lastFeedTime;
 
+    @ManyToMany(mappedBy = "dogs")
+    private Set<Staff> staffs = new HashSet<>();
+
 
     public Dog() {
         // Default constructor
     }
 
-    public Dog(String name, int age, String imgURL, String species, String AdoptStatus, String MedicalHistory, String intro, String gender, LocalDateTime EntryDate,
-               LocalDateTime AdoptedDate,
-               LocalDateTime LastVaccineDate,
-               LocalDateTime LastUpdateTime,
-               LocalDateTime lastFeedTime) {
+    public Dog(long id, String name, int age, String imgURL, String species, String adoptStatus, String medicalHistory, String intro, String gender, LocalDateTime entryDate, LocalDateTime adoptedDate, LocalDateTime lastVaccineDate, LocalDateTime lastUpdateTime, LocalDateTime lastFeedTime, Set<Staff> staffs) {
+        this.id = id;
         this.name = name;
         this.age = age;
         this.imgURL = imgURL;
-        this.MedicalHistory = MedicalHistory;
-        this.intro = intro;
-        this.AdoptStatus = AdoptStatus;
         this.species = species;
+        AdoptStatus = adoptStatus;
+        MedicalHistory = medicalHistory;
+        this.intro = intro;
         this.gender = gender;
-        this.EntryDate = EntryDate;
-        this.AdoptedDate = AdoptedDate;
-        this.LastVaccineDate = LastVaccineDate;
-        this.LastUpdateTime = LastUpdateTime;
+        EntryDate = entryDate;
+        AdoptedDate = adoptedDate;
+        LastVaccineDate = lastVaccineDate;
+        LastUpdateTime = lastUpdateTime;
         this.lastFeedTime = lastFeedTime;
+        this.staffs = staffs;
     }
 
+    public Set<Staff> getStaffs() {
+        return staffs;
+    }
+
+    public void setStaffs(Set<Staff> staffs) {
+        this.staffs = staffs;
+    }
     // Getters and setters for all attributes
 
     public long getId() {

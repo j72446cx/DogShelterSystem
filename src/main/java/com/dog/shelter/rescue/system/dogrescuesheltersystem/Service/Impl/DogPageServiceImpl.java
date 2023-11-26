@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class DogPageServiceImpl implements DogPageService {
@@ -87,7 +88,9 @@ public class DogPageServiceImpl implements DogPageService {
 
     @Override
     public Dog getById(Long id){
-        return dogPageRepository.getById(id);
+
+//        Dog dog = dogPageRepository.getById(id);
+    return dogPageRepository.getById(id);
     }
 
     @Override
@@ -147,5 +150,10 @@ public class DogPageServiceImpl implements DogPageService {
         List<MedicationRequest> list = dogPageRepository.getMedication(dog_id, staff_id, dosage,medication_time_start, medication_time_end, notes);
         Page<MedicationRequest> medicationRequests = (Page<MedicationRequest>) list;
         return new DogPageBean(medicationRequests.getTotal(), medicationRequests.getResult());
+    }
+
+    @Override
+    public List<Staff> dogGetStaff(Long id){
+        return dogPageRepository.dogGetStaff(id);
     }
 }

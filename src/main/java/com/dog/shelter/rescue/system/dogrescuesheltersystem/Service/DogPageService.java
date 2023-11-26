@@ -6,6 +6,7 @@ import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Request.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public interface DogPageService {
 
@@ -53,4 +54,6 @@ public interface DogPageService {
     void deleteMedication(List<Long> ids);
 
     void deleteFeeding(List<Long> ids);
+
+    List<Staff> dogGetStaff(Long id);
 }

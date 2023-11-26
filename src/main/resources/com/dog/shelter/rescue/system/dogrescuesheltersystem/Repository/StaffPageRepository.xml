@@ -180,6 +180,10 @@
                 and gender = #{gender}
             </if>
 
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+
         </where>
     </select>
 </mapper>
