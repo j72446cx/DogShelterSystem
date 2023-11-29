@@ -32,4 +32,5 @@ public interface StaffPageService {
     Staff login(Staff staff);
 
     List<Dog> staffGetDog(Long id);
+
 }
