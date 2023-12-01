@@ -9,8 +9,8 @@
     </select>
 
     <insert id="save" parameterType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Message">
-        INSERT INTO Message (senderId, receiverId, type, title, body, date, status)
-        VALUES (#{senderId}, #{receiverId}, #{type}, #{title}, #{body}, #{date}, #{status})
+        INSERT INTO Message (senderId, receiverId, type, title, body, date, status, senderName, receiverName)
+        VALUES (#{senderId}, #{receiverId}, #{type}, #{title}, #{body}, #{date}, #{status}, #{senderName}, #{receiverName})
     </insert>
 
     <update id="read">

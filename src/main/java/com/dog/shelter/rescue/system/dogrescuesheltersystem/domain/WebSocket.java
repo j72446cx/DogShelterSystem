@@ -5,6 +5,7 @@ import com.dog.shelter.rescue.system.dogrescuesheltersystem.Repository.StaffPage
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.Service.MessageService;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.Service.StaffPageService;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.utils.JwtUtils;
+import com.sun.xml.bind.v2.TODO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
@@ -74,11 +75,14 @@ public class WebSocket {
 
         try{
             JSONObject jsonMessage = new JSONObject(message);
-            String action = jsonMessage.getString("action");
+            String action = jsonMessage.getString("type");
             String title = jsonMessage.optString("title", "none");
             Long senderId = jsonMessage.optLong("senderId", -1);
             Integer status = jsonMessage.optInt("status", 0);
             String msgContent = jsonMessage.getString("body");
+
+            StaffPageService staffPageService =applicationContext.getBean(StaffPageService.class);
+            Staff staff = staffPageService.getById(senderId);
 
             Message message1 = new Message();
             MessageService messageService = applicationContext.getBean(MessageService.class);
@@ -89,6 +93,14 @@ public class WebSocket {
             message1.setType(action);
             message1.setStatus(status);
 
+            if(!staff.getMiddleName().equals("")){
+                message1.setSenderName(staff.getFirstName() + " " + staff.getMiddleName() + " " + staff.getLastName());
+            }
+            else{
+                message1.setSenderName(staff.getFirstName() + " " + staff.getLastName());
+            }
+
+
             switch (action) {
                 case "sendToOne":
                     Long receiverId = jsonMessage.optLong("receiverId", -1);
@@ -97,6 +109,14 @@ public class WebSocket {
                     Session receiverSession = sessionMap.get(receiverId);
                     if (receiverSession != null && receiverSession.isOpen()){
                         receiverSession.getAsyncRemote().sendText(message);
+                    }
+
+                    Staff staff1 = staffPageService.getById(receiverId);
+                    if(!staff1.getMiddleName().equals("")){
+                        message1.setReceiverName(staff1.getFirstName() + " " + staff1.getMiddleName() + " " + staff1.getLastName());
+                    }
+                    else{
+                        message1.setReceiverName(staff1.getFirstName() + " " + staff1.getLastName());
                     }
 
                     // save message to database
@@ -112,13 +132,21 @@ public class WebSocket {
                     if (jsonArray != null){
                         for (int i = 0; i < jsonArray.length(); i++) {
                             Long receiver = jsonArray.getLong(i);
-
                             Session receiverSe = sessionMap.get(receiver);
                             if (receiverSe != null && receiverSe.isOpen()){
 
                                 log.info("Sending message to user_id: {}, with message: {}", receiver, message);
                                 receiverSe.getAsyncRemote().sendText(message);
                             }
+
+                            Staff staff2 = staffPageService.getById(receiver);
+                            if(!staff2.getMiddleName().equals("")){
+                                message1.setReceiverName(staff2.getFirstName() + " " + staff2.getMiddleName() + " " + staff2.getLastName());
+                            }
+                            else{
+                                message1.setReceiverName(staff2.getFirstName() + " " + staff2.getLastName());
+                            }
+
 
                             message1.setReceiverId(receiver);
                             messageService.saveMessage(message1);

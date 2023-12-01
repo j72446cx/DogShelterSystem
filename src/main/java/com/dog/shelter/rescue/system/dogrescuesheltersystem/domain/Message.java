@@ -20,11 +20,14 @@ public class Message {
     private LocalDateTime date;
     private Integer status;
 
+    private String receiverName;
+    private String senderName;
+
     public Message(){
 
     }
 
-    public Message(long messageId, String title, String type, String body, Long senderId, Long receiverId, LocalDateTime date, Integer status) {
+    public Message(long messageId, String title, String type, String body, Long senderId, Long receiverId, LocalDateTime date, Integer status, String receiverName, String senderName) {
         this.messageId = messageId;
         this.title = title;
         this.type = type;
@@ -33,6 +36,8 @@ public class Message {
         this.receiverId = receiverId;
         this.date = date;
         this.status = status;
+        this.receiverName = receiverName;
+        this.senderName = senderName;
     }
 
     public long getMessageId() {
@@ -97,6 +102,22 @@ public class Message {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
+    }
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
     }
 }
 
