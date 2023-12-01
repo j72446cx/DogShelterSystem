@@ -52,6 +52,47 @@ create table Staff
         unique (id)
 );
 
+create table Message
+(
+    messageId    int unsigned auto_increment
+        primary key,
+    senderId     int unsigned null,
+    receiverId   int unsigned null,
+    type         varchar(255) null,
+    title        varchar(255) null,
+    body         text         null,
+    date         datetime     null,
+    status       tinyint(1)   null,
+    senderName   varchar(100) null,
+    receiverName varchar(100) null,
+    constraint messageId
+        unique (messageId),
+    constraint message_ibfk_1
+        foreign key (senderId) references Staff (id),
+    constraint message_ibfk_2
+        foreign key (receiverId) references Staff (id)
+);
+
+create index receiverId
+    on Message (receiverId);
+
+create index senderId
+    on Message (senderId);
+
+create table Staff_Dog
+(
+    staff_id int unsigned not null,
+    dog_id   int unsigned not null,
+    primary key (staff_id, dog_id),
+    constraint staff_dog_ibfk_1
+        foreign key (staff_id) references Staff (id),
+    constraint staff_dog_ibfk_2
+        foreign key (dog_id) references Dog (id)
+);
+
+create index dog_id
+    on Staff_Dog (dog_id);
+
 create table behavior_log
 (
     id                 int auto_increment
