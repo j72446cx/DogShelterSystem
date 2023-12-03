@@ -1,3 +1,24 @@
+create table Customer
+(
+    id           int unsigned auto_increment
+        primary key,
+    age          int          null,
+    firstName    varchar(40)  null,
+    middleName   varchar(40)  null,
+    lastName     varchar(40)  null,
+    email        varchar(100) null,
+    gender       varchar(10)  null,
+    address      varchar(255) null,
+    postCode     varchar(20)  null,
+    avatar       varchar(255) null,
+    username     varchar(255) null,
+    password     varchar(255) null,
+    registerDate datetime     null,
+    phoneNumber  varchar(50)  null,
+    constraint Customer_id_uindex
+        unique (id)
+);
+
 create table Dog
 (
     id              int unsigned auto_increment
@@ -17,6 +38,33 @@ create table Dog
     lastFeedTime    datetime     null,
     constraint Dog_id_uindex
         unique (id)
+);
+
+create table PotentialAdopter
+(
+    id                            int unsigned not null
+        primary key,
+    householdMembers              int          null,
+    children                      tinyint(1)   null,
+    otherPets                     tinyint(1)   null,
+    housingType                   varchar(100) null,
+    housingStability              varchar(255) null,
+    landlordConsent               tinyint(1)   null,
+    workStudySchedule             text         null,
+    dailyActivities               text         null,
+    incomeLevel                   varchar(100) null,
+    petInsurance                  tinyint(1)   null,
+    previousPetOwnership          tinyint(1)   null,
+    petCareKnowledge              text         null,
+    petPreference                 text         null,
+    adoptionPurpose               varchar(255) null,
+    emergencyPlan                 text         null,
+    referencePerson               text         null,
+    agreementCompliance           tinyint(1)   null,
+    postAdoptionSupportCommitment tinyint(1)   null,
+    landlordContact               varchar(100) null,
+    constraint potentialadopter_ibfk_1
+        foreign key (id) references Customer (id)
 );
 
 create table Staff
@@ -223,5 +271,4 @@ create index dog_id
 
 create index staff_id
     on medication_log (staff_id);
-
 
