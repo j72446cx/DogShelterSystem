@@ -2,10 +2,12 @@ package com.dog.shelter.rescue.system.dogrescuesheltersystem.Service.Impl;
 
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.Repository.PotentialAdopterRepository;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.Service.PotentialAdopterService;
+import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.ApplicationForm;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.PotentialAdopter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -33,5 +35,27 @@ public class PotentialAdopterServiceImpl implements PotentialAdopterService {
     @Override
     public void delete(List<Long> ids) {
         potentialAdopterRepository.delete(ids);
+    }
+
+
+    @Override
+    public void postForm(ApplicationForm applicationForm) {
+        applicationForm.setCreated_date(LocalDateTime.now());
+        potentialAdopterRepository.postForm(applicationForm);
+    }
+
+    @Override
+    public ApplicationForm getForm(Long ids) {
+        return potentialAdopterRepository.getForm(ids);
+    }
+
+    @Override
+    public void editForm(ApplicationForm applicationForm) {
+        potentialAdopterRepository.editForm(applicationForm);
+    }
+
+    @Override
+    public void deleteForm(List<Long> ids) {
+        potentialAdopterRepository.deleteForm(ids);
     }
 }

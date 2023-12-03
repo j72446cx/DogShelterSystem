@@ -25,6 +25,7 @@ public class StaffPageController {
     @GetMapping
     public Result page(@RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer pageSize,
+                       String job,
                        String username,
                        Long id, Integer age,
                        String firstName, String lastName, String middleName, String gender,
@@ -44,14 +45,14 @@ public class StaffPageController {
         log.info("Page querying with parameter: with page: {} and pageSize: {}, id: {}, age: {}, gender: {}, " +
                 "email: {}, firstname: {}, lastname: {}, middle name: {}, phone number: {}, postcode: {}, " +
                 "role: {}, entryDate between {} and {}, contract start date between {} and {}, contract end date between {} and {} "+
-                "last update between {} and {}, date of birth between {} and {}, username : {}",
+                "last update between {} and {}, date of birth between {} and {}, username : {}, job:{}",
                 page, pageSize, id, age, gender, email, firstName, lastName, middleName, phoneNumber, postCode,
                 role, entryStartDate, entryEndDate, contractStartStartDate, contractStartEndDate, contractEndStartDate, contractEndEndDate,
-                lastUpdateTimeStart, lastUpdateTimeEnd, dateOfBirthStart, dateOfBirthEnd, username);
+                lastUpdateTimeStart, lastUpdateTimeEnd, dateOfBirthStart, dateOfBirthEnd, username, job);
 
         return Result.success(staffPageService.page(page, pageSize, id, age, firstName, lastName, middleName, gender, identification,
                 email, phoneNumber, postCode, role, entryStartDate, entryEndDate, contractStartStartDate, contractStartEndDate, contractEndStartDate, contractEndEndDate,
-                lastUpdateTimeStart, lastUpdateTimeEnd, dateOfBirthStart, dateOfBirthEnd, username));
+                lastUpdateTimeStart, lastUpdateTimeEnd, dateOfBirthStart, dateOfBirthEnd, username, job));
     }
 
     @GetMapping("/{ids}")

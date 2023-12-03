@@ -12,8 +12,8 @@ import java.util.List;
 @Mapper
 public interface StaffPageRepository {
 
-    @Insert("INSERT INTO Staff (age, firstName, lastName, middleName, email, phoneNumber, address, postCode, role, dateOfBirth, gender, entryDate, salary, emergency_Contact, avatar, contractStartDate, contractEndDate, username, password, contractImg, identityPhoto, identification, lastUpdateTime) " +
-            "VALUES (#{age}, #{firstName}, #{lastName}, #{middleName}, #{email}, #{phoneNumber}, #{address}, #{postCode}, #{role}, #{dateOfBirth}, #{gender}, #{entryDate}, #{salary}, #{emergency_Contact}, #{avatar}, #{contractStartDate}, #{contractEndDate}, #{username}, #{password}, #{contractImg}, #{identityPhoto}, #{identification}, #{lastUpdateTime})")
+    @Insert("INSERT INTO Staff (age, firstName, lastName, middleName, email, phoneNumber, address, postCode, role, dateOfBirth, gender, entryDate, salary, emergency_Contact, avatar, contractStartDate, contractEndDate, username, password, contractImg, identityPhoto, identification, lastUpdateTime, job) " +
+            "VALUES (#{age}, #{firstName}, #{lastName}, #{middleName}, #{email}, #{phoneNumber}, #{address}, #{postCode}, #{role}, #{dateOfBirth}, #{gender}, #{entryDate}, #{salary}, #{emergency_Contact}, #{avatar}, #{contractStartDate}, #{contractEndDate}, #{username}, #{password}, #{contractImg}, #{identityPhoto}, #{identification}, #{lastUpdateTime}, #{job})")
     void insert(Staff staff);
 
     List<Staff> list(Long id, Integer age,
@@ -24,7 +24,7 @@ public interface StaffPageRepository {
                      LocalDate contractStartStartDate, LocalDate contractStartEndDate,
                      LocalDate contractEndStartDate, LocalDate contractEndEndDate,
                      LocalDate lastUpdateTimeStart, LocalDate lastUpdateTimeEnd,
-                     LocalDate dateOfBirthStart, LocalDate dateOfBirthEnd, String username);
+                     LocalDate dateOfBirthStart, LocalDate dateOfBirthEnd, String username, String job);
 
     void delete(List<Long> ids);
 

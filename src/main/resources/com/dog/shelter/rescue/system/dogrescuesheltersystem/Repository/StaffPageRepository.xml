@@ -93,7 +93,11 @@
             </if>
 
             <if test="identityPhoto != null and identityPhoto != ''">
-                identityPhoto = #{identityPhoto}
+                identityPhoto = #{identityPhoto},
+            </if>
+
+            <if test="job != null and job != ''">
+                job = #{job}
             </if>
 
 
@@ -182,6 +186,10 @@
 
             <if test="username != null and username != ''">
                 and username = #{username}
+            </if>
+
+            <if test="job != null and job != ''">
+                and job = #{job}
             </if>
 
         </where>

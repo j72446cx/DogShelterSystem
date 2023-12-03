@@ -43,7 +43,7 @@ public class StaffPageServiceImpl implements StaffPageService{
                               LocalDate contractStartStartDate, LocalDate contractStartEndDate,
                               LocalDate contractEndStartDate, LocalDate contractEndEndDate,
                               LocalDate lastUpdateTimeStart, LocalDate lastUpdateTimeEnd,
-                              LocalDate dateOfBirthStart, LocalDate dateOfBirthEnd, String username){
+                              LocalDate dateOfBirthStart, LocalDate dateOfBirthEnd, String username, String job){
 
         PageHelper.startPage(page, pageSize);
         List<Staff> staffList =  staffPageRepository.list(id, age, firstName, lastName, middleName, gender,
@@ -51,7 +51,7 @@ public class StaffPageServiceImpl implements StaffPageService{
                 entryStartDate, entryEndDate,
                 contractStartStartDate, contractStartEndDate,
                 contractEndStartDate, contractEndEndDate,
-                lastUpdateTimeStart, lastUpdateTimeEnd, dateOfBirthStart, dateOfBirthEnd, username);
+                lastUpdateTimeStart, lastUpdateTimeEnd, dateOfBirthStart, dateOfBirthEnd, username, job);
 
         Page<Staff> staffPage = (Page<Staff>) staffList;
 

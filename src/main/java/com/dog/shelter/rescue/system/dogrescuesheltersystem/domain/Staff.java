@@ -36,6 +36,7 @@ public class Staff {
     private String identityPhoto;
     private String identification;
     private LocalDateTime lastUpdateTime;
+    private String job;
 
 
     @ManyToMany
@@ -48,7 +49,7 @@ public class Staff {
 
     public Staff(){};
 
-    public Staff(long id, int age, String firstName, String lastName, String middleName, String email, String phoneNumber, String address, String postCode, String role, LocalDateTime dateOfBirth, String gender, LocalDateTime entryDate, float salary, String emergency_Contact, String avatar, LocalDateTime contractStartDate, LocalDateTime contractEndDate, String username, String password, String contractImg, String identityPhoto, String identification, LocalDateTime lastUpdateTime, Set<Dog> dogs) {
+    public Staff(long id, int age, String firstName, String lastName, String middleName, String email, String phoneNumber, String address, String postCode, String role, LocalDateTime dateOfBirth, String gender, LocalDateTime entryDate, float salary, String emergency_Contact, String avatar, LocalDateTime contractStartDate, LocalDateTime contractEndDate, String username, String password, String contractImg, String identityPhoto, String identification, LocalDateTime lastUpdateTime, Set<Dog> dogs, String job) {
         this.id = id;
         this.age = age;
         this.firstName = firstName;
@@ -74,9 +75,16 @@ public class Staff {
         this.identification = identification;
         this.lastUpdateTime = lastUpdateTime;
         this.dogs = dogs;
+        this.job = job;
     }
 
+    public String getJob() {
+        return job;
+    }
 
+    public void setJob(String job) {
+        this.job = job;
+    }
 
     public long getId() {
         return id;

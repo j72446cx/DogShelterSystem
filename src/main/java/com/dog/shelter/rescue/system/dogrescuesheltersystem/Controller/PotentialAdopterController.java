@@ -1,6 +1,7 @@
 package com.dog.shelter.rescue.system.dogrescuesheltersystem.Controller;
 
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.Service.PotentialAdopterService;
+import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.ApplicationForm;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.PotentialAdopter;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,34 @@ public class PotentialAdopterController {
 
     @Autowired
     private PotentialAdopterService potentialAdopterService;
+
+    @PostMapping("application/postForm")
+    public Result postForm(@RequestBody ApplicationForm applicationForm){
+        log.info("Application form posting: {} ", applicationForm.toString());
+        potentialAdopterService.postForm(applicationForm);
+        return Result.success();
+    }
+
+    @GetMapping("/application/{ids}")
+    public Result getForm(@PathVariable Long ids){
+        log.info("Querying form with id: {}", ids);
+        ApplicationForm applicationForm = potentialAdopterService.getForm(ids);
+        return Result.success(applicationForm);
+    }
+
+    @PutMapping("/application/editForm")
+    public Result editForm(@RequestBody ApplicationForm applicationForm){
+        log.info("Editing application form: {}", applicationForm);
+        potentialAdopterService.editForm(applicationForm);
+        return Result.success();
+    }
+
+    @DeleteMapping("/application/deleteForm/{ids}")
+    public Result deleteForm(@PathVariable List<Long> ids){
+        log.info("Deleting form with id: {}", ids);
+        potentialAdopterService.deleteForm(ids);
+        return Result.success();
+    }
 
     @PostMapping("/save")
     public Result save(@RequestBody PotentialAdopter potentialAdopter){

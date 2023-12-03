@@ -21,7 +21,7 @@ public interface StaffPageService {
                        LocalDate contractStartStartDate, LocalDate contractStartEndDate,
                        LocalDate contractEndStartDate, LocalDate contractEndEndDate,
                        LocalDate lastUpdateTimeStart, LocalDate lastUpdateTimeEnd,
-                       LocalDate dateOfBirthStart, LocalDate dateOfBirthEnd, String username);
+                       LocalDate dateOfBirthStart, LocalDate dateOfBirthEnd, String username, String job);
 
     void delete(List<Long> ids);
 
