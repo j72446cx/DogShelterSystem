@@ -33,7 +33,7 @@ public class Dog {
 
 
     public Dog() {
-        // Default constructor
+
     }
 
     public Dog(long id, String name, int age, String imgURL, String species, String adoptStatus, String medicalHistory, String intro, String gender, LocalDateTime entryDate, LocalDateTime adoptedDate, LocalDateTime lastVaccineDate, LocalDateTime lastUpdateTime, LocalDateTime lastFeedTime, Set<Staff> staffs) {

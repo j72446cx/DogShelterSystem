@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dog.shelter.rescue.system.dogrescuesheltersystem.Repository.CustomerPageRepository">
+
+    <delete id="delete">
+        delete
+        from Customer
+        where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="edit">
+        update Customer
+        <set>
+            <if test="age != null">
+                age = #{age},
+            </if>
+
+            <if test="gender != null and gender != ''">
+                gender = #{gender},
+            </if>
+
+            <if test="firstName != null and firstName != ''">
+                firstName = #{firstName},
+            </if>
+
+            <if test="lastName != null and lastName != ''">
+                lastName = #{lastName},
+            </if>
+
+            <if test="middleName != null and middleName != ''">
+                middleName = #{middleName},
+            </if>
+
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+
+            <if test="phoneNumber != null and phoneNumber != ''">
+                phoneNumber = #{phoneNumber},
+            </if>
+
+            <if test="postCode != null and postCode != ''">
+                postCode = #{postCode},
+            </if>
+
+            <if test="registerDate != null">
+                registerDate = #{registerDate},
+            </if>
+
+            <if test="avatar != null and avatar != ''">
+                avatar = #{avatar},
+            </if>
+
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+
+        </set>
+        where id = #{id}
+    </update>
+
+
+</mapper>

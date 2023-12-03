@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dog.shelter.rescue.system.dogrescuesheltersystem.Repository.PotentialAdopterRepository">
+
+    <delete id="delete">
+        delete
+        from PotentialAdopter
+        where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="edit">
+        update PotentialAdopter
+        <set>
+            <if test="householdMembers != null">
+                householdMembers = #{householdMembers},
+            </if>
+
+            <if test="children != null">
+                children = #{children},
+            </if>
+
+            <if test="otherPets != null">
+                otherPets = #{otherPets},
+            </if>
+
+            <if test="housingType != null and housingType != ''">
+                housingType = #{housingType},
+            </if>
+
+            <if test="housingStability != null and housingStability != ''">
+                housingStability = #{housingStability},
+            </if>
+
+            <if test="landlordConsent != null">
+                landlordConsent = #{landlordConsent},
+            </if>
+
+            <if test="workStudySchedule != null and workStudySchedule != ''">
+                workStudySchedule = #{workStudySchedule},
+            </if>
+
+            <if test="dailyActivities != null and dailyActivities != ''">
+                dailyActivities = #{dailyActivities},
+            </if>
+
+            <if test="incomeLevel != null and incomeLevel != ''">
+                incomeLevel = #{incomeLevel},
+            </if>
+
+            <if test="petInsurance != null">
+                petInsurance = #{petInsurance},
+            </if>
+
+            <if test="previousPetOwnership != null">
+                previousPetOwnership = #{previousPetOwnership},
+            </if>
+
+            <if test="petCareKnowledge != null and petCareKnowledge != ''">
+                petCareKnowledge = #{petCareKnowledge},
+            </if>
+
+            <if test="petPreference != null and petPreference != ''">
+                petPreference = #{petPreference},
+            </if>
+
+            <if test="adoptionPurpose != null and adoptionPurpose != ''">
+                adoptionPurpose = #{adoptionPurpose},
+            </if>
+
+            <if test="emergencyPlan != null and emergencyPlan != ''">
+                emergencyPlan = #{emergencyPlan},
+            </if>
+
+            <if test="referencePerson != null and referencePerson != ''">
+                referencePerson = #{referencePerson},
+            </if>
+
+            <if test="agreementCompliance != null">
+                agreementCompliance = #{agreementCompliance},
+            </if>
+
+            <if test="postAdoptionSupportCommitment != null">
+                postAdoptionSupportCommitment = #{postAdoptionSupportCommitment},
+            </if>
+
+            <if test="landlordContact != null and landlordContact != ''">
+                landlordContact = #{landlordContact},
+            </if>
+
+
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>
