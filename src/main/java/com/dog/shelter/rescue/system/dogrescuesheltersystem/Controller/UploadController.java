@@ -23,7 +23,6 @@ public class UploadController {
         String url = aliOSSUtils.upload(image);
         log.info("Image upload successfully, with url: {}", url);
         return Result.success(url);
-
     }
 
 

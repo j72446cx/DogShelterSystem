@@ -92,6 +92,25 @@
                 landlordContact = #{landlordContact},
             </if>
 
+            <if test="living_room != null and living_room != ''">
+                living_room = #{living_room},
+            </if>
+
+            <if test="garden != null and garden != ''">
+                garden = #{garden},
+            </if>
+            <if test="balcony != null and balcony != ''">
+                balcony = #{balcony},
+            </if>
+            <if test="kitchen != null and kitchen != ''">
+                kitchen = #{kitchen},
+            </if>
+            <if test="family_photo != null and family_photo != ''">
+                family_photo = #{family_photo},
+            </if>
+            <if test="preparation != null and preparation != ''">
+                preparation = #{preparation}
+            </if>
 
         </set>
         where id = #{id}
@@ -109,30 +128,6 @@
     <update id="editForm">
         update ApplicationForm
         <set>
-
-            <if test="living_room != null and living_room != ''">
-                living_room = #{living_room},
-            </if>
-
-            <if test="garden != null and garden != ''">
-                garden = #{garden},
-            </if>
-
-            <if test="balcony != null and balcony != ''">
-                balcony = #{balcony},
-            </if>
-
-            <if test="kitchen != null and kitchen != ''">
-                kitchen = #{kitchen},
-            </if>
-
-            <if test="preparation != null and preparation != ''">
-                preparation = #{preparation},
-            </if>
-
-            <if test="family_photo != null and family_photo != ''">
-                family_photo = #{family_photo},
-            </if>
 
             <if test="interview_date != null">
                 interview_date = #{interview_date},

@@ -13,6 +13,7 @@
         </foreach>
     </delete>
 
+
     <update id="edit">
         update Customer
         <set>
@@ -63,6 +64,64 @@
         </set>
         where id = #{id}
     </update>
+
+    <select id="list" resultType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Customer">
+        select * from Customer
+        <where>
+            <if test="id != null and id != 0">
+                id = #{id}
+            </if>
+
+            <if test="age != null and age != 0">
+                age = #{age}
+            </if>
+
+            <if test="firstName != null and firstName != ''">
+                and firstName = #{firstName}
+            </if>
+
+            <if test="lastName != null and lastName != ''">
+                and lastName = #{lastName}
+            </if>
+
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+
+            <if test="phoneNumber != null and phoneNumber != ''">
+                and phoneNumber = #{phoneNumber}
+            </if>
+
+            <if test="postCode != null and postCode != ''">
+                and postCode = #{postCode}
+            </if>
+
+            <if test="avatar != null and avatar != ''">
+                and avatar = #{avatar}
+            </if>
+
+            <if test="gender != null and gender != ''">
+                and gender = #{gender}
+            </if>
+
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+
+            <if test="registerDateStart != null and registerDateEnd != null">
+                and registerDate between #{registerDateStart} and #{registerDateEnd}
+            </if>
+
+            <if test="isPotentialAdopter != null">
+                and isPotentialAdopter = #{isPotentialAdopter}
+            </if>
+
+        </where>
+    </select>
 
 
 </mapper>

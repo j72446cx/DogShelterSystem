@@ -1,20 +1,21 @@
 create table Customer
 (
-    id           int unsigned auto_increment
+    id                 int unsigned auto_increment
         primary key,
-    age          int          null,
-    firstName    varchar(40)  null,
-    middleName   varchar(40)  null,
-    lastName     varchar(40)  null,
-    email        varchar(100) null,
-    gender       varchar(10)  null,
-    address      varchar(255) null,
-    postCode     varchar(20)  null,
-    avatar       varchar(255) null,
-    username     varchar(255) null,
-    password     varchar(255) null,
-    registerDate datetime     null,
-    phoneNumber  varchar(50)  null,
+    age                int                  null,
+    firstName          varchar(40)          null,
+    middleName         varchar(40)          null,
+    lastName           varchar(40)          null,
+    email              varchar(100)         null,
+    gender             varchar(10)          null,
+    address            varchar(255)         null,
+    postCode           varchar(20)          null,
+    avatar             varchar(255)         null,
+    username           varchar(255)         null,
+    password           varchar(255)         null,
+    registerDate       datetime             null,
+    phoneNumber        varchar(50)          null,
+    isPotentialAdopter tinyint(1) default 0 null,
     constraint Customer_id_uindex
         unique (id)
 );
@@ -63,8 +64,32 @@ create table PotentialAdopter
     agreementCompliance           tinyint(1)   null,
     postAdoptionSupportCommitment tinyint(1)   null,
     landlordContact               varchar(100) null,
-    constraint potentialadopter_ibfk_1
+    living_room                   varchar(255) null,
+    garden                        varchar(255) null,
+    balcony                       varchar(255) null,
+    kitchen                       varchar(255) null,
+    family_photo                  varchar(255) null,
+    preparation                   text         null,
+    constraint PotentialAdopter_Customer_id_fk
         foreign key (id) references Customer (id)
+);
+
+create table ApplicationForm
+(
+    adopter_id     int unsigned null,
+    dog_id         int unsigned null,
+    interview_date datetime     null,
+    reason         text         null,
+    status         varchar(20)  null,
+    id             int unsigned auto_increment
+        primary key,
+    created_date   datetime     null,
+    constraint ApplicationForm_id_uindex
+        unique (id),
+    constraint ApplicationForm_Dog_id_fk
+        foreign key (dog_id) references Dog (id),
+    constraint ApplicationForm_PotentialAdopter_id_fk
+        foreign key (adopter_id) references PotentialAdopter (id)
 );
 
 create table Staff
@@ -72,8 +97,8 @@ create table Staff
     id                int unsigned auto_increment
         primary key,
     age               int          null,
-    firstName         varchar(255) not null,
-    lastName          varchar(255) not null,
+    firstName         varchar(255) null,
+    lastName          varchar(255) null,
     middleName        varchar(255) null,
     email             varchar(255) null,
     phoneNumber       varchar(255) null,
@@ -81,7 +106,7 @@ create table Staff
     postCode          varchar(255) null,
     role              varchar(255) null,
     dateOfBirth       date         null,
-    gender            varchar(255) not null,
+    gender            varchar(255) null,
     entryDate         datetime     null,
     salary            float        null,
     emergency_Contact varchar(255) null,
@@ -94,6 +119,7 @@ create table Staff
     identityPhoto     varchar(255) null,
     identification    varchar(255) null,
     lastUpdateTime    datetime     null,
+    job               varchar(30)  null,
     constraint Staff_email_uindex
         unique (email),
     constraint Staff_id_uindex
@@ -126,6 +152,27 @@ create index receiverId
 
 create index senderId
     on Message (senderId);
+
+create table MessageToUser
+(
+    messageId    int unsigned auto_increment
+        primary key,
+    senderId     int unsigned null,
+    receiverId   int unsigned null,
+    type         varchar(255) null,
+    title        varchar(255) null,
+    body         text         null,
+    date         datetime     null,
+    status       tinyint(1)   null,
+    senderName   varchar(100) null,
+    receiverName varchar(100) null,
+    constraint MessageToUser_messageId_uindex
+        unique (messageId),
+    constraint MessageToUser_Customer_id_fk
+        foreign key (receiverId) references Customer (id),
+    constraint MessageToUser_Staff_id_fk
+        foreign key (senderId) references Staff (id)
+);
 
 create table Staff_Dog
 (

@@ -23,7 +23,16 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public void saveMessage(Message message) {
         messageRepository.save(message);
+    }
 
+    @Override
+    public void saveMessageUser(Message message) {
+        messageRepository.saveUser(message);
+    }
+
+    @Override
+    public List<Message> getMessagesForReceiverUser(Long receiver) {
+        return messageRepository.findByReceiverUser(receiver);
     }
 
     @Override
@@ -36,8 +45,22 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
+    public MessagePageBean pageUser(Integer page, Integer pageSize, Long senderId, Long receiverId, String type, LocalDate dateStart, LocalDate dateEnd, Integer status) {
+        PageHelper.startPage(page, pageSize);
+        List<Message> messageList = messageRepository.pageUser(page, pageSize, senderId, receiverId, type, dateStart, dateEnd, status);
+        Page<Message> messagePage = (Page<Message>) messageList;
+
+        return new MessagePageBean(messagePage.getTotal(), messagePage.getResult());
+    }
+
+    @Override
     public List<Message> getMessagesForReceiver(Long receiver) {
         return messageRepository.findByReceiver(receiver);
+    }
+
+    @Override
+    public void readUser(Long messageId) {
+        messageRepository.readUser(messageId);
     }
 
     @Override
@@ -48,5 +71,10 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public void delete(List<Long> ids) {
         messageRepository.delete(ids);
+    }
+
+    @Override
+    public void deleteUser(List<Long> ids) {
+        messageRepository.deleteUser(ids);
     }
 }

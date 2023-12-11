@@ -40,10 +40,40 @@ public class MessageController {
         ));
     }
 
+    @GetMapping("/user")
+    public Result pageUser(@RequestParam(defaultValue = "1") Integer page,
+                       @RequestParam(defaultValue = "10") Integer pageSize,
+                       Long senderId, Long receiverId, String type,
+                       @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateStart,
+                       @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateEnd,
+                       Integer status){
+
+        log.info("Querying message of page: {}, pageSize: {}, senderId : {}, receiverId: {}, type: {}, dateStart: {}, dateEnd: {}, status: {}",
+                page, pageSize, senderId, receiverId, type, dateStart, dateEnd, status);
+
+        return Result.success(messageService.pageUser(
+                page, pageSize, senderId, receiverId, type, dateStart, dateEnd, status
+        ));
+    }
+
     @PostMapping("/read/{messageId}")
     public Result read(@PathVariable Long messageId){
         log.info("Read message with id : {}", messageId);
         messageService.read(messageId);
+        return Result.success();
+    }
+
+    @PostMapping("/user/read/{messageId}")
+    public Result readUser(@PathVariable Long messageId){
+        log.info("Read message with id : {}", messageId);
+        messageService.readUser(messageId);
+        return Result.success();
+    }
+
+    @DeleteMapping("/user/delete/{ids}")
+    public Result deleteUser(@PathVariable List<Long> ids){
+        log.info("Deleting message with id: {}", ids);
+        messageService.deleteUser(ids);
         return Result.success();
     }
 

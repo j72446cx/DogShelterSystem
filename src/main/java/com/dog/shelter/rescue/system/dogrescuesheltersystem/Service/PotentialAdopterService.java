@@ -1,6 +1,7 @@
 package com.dog.shelter.rescue.system.dogrescuesheltersystem.Service;
 
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.ApplicationForm;
+import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.ApplicationFormBean;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.PotentialAdopter;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface PotentialAdopterService {
     void editForm(ApplicationForm applicationForm);
 
     void deleteForm(List<Long> ids);
+
+    ApplicationFormBean getFormByAdopter(Integer page, Integer pageSize, Long adopter_id);
 }

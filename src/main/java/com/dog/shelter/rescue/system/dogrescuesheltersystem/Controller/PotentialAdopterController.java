@@ -18,7 +18,7 @@ public class PotentialAdopterController {
     @Autowired
     private PotentialAdopterService potentialAdopterService;
 
-    @PostMapping("application/postForm")
+    @PostMapping("/application/postForm")
     public Result postForm(@RequestBody ApplicationForm applicationForm){
         log.info("Application form posting: {} ", applicationForm.toString());
         potentialAdopterService.postForm(applicationForm);
@@ -30,6 +30,15 @@ public class PotentialAdopterController {
         log.info("Querying form with id: {}", ids);
         ApplicationForm applicationForm = potentialAdopterService.getForm(ids);
         return Result.success(applicationForm);
+    }
+
+    @GetMapping("/application/adopter")
+    public Result getFormByAdopter(
+            @RequestParam(defaultValue = "1") Integer page,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            Long adopter_id){
+        log.info("Querying form by adopter id: {}, page:{}, pageSize: {}", adopter_id, page, pageSize);
+        return Result.success(potentialAdopterService.getFormByAdopter(page, pageSize, adopter_id));
     }
 
     @PutMapping("/application/editForm")
@@ -48,6 +57,9 @@ public class PotentialAdopterController {
 
     @PostMapping("/save")
     public Result save(@RequestBody PotentialAdopter potentialAdopter){
+        if (potentialAdopterService.getById(potentialAdopter.getId()) != null){
+            return Result.error("Potential Adopter already exists");
+        }
         log.info("New potential adopter: {}", potentialAdopter.toString());
         potentialAdopterService.save(potentialAdopter);
         return Result.success();

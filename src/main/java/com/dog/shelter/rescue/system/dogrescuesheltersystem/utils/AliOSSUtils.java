@@ -16,7 +16,7 @@ public class AliOSSUtils {
     private AliOSSProperties aliOSSProperties;
 
     public String upload(MultipartFile file) throws IOException {
-        //获取阿里云OSS参数
+
         String endpoint = aliOSSProperties.getEndpoint();
         String accessKeyId = aliOSSProperties.getAccessKeyId();
         String accessKeySecret = aliOSSProperties.getAccessKeySecret();

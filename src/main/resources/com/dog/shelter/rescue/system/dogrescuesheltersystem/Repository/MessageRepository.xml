@@ -8,8 +8,17 @@
         select * from Message receiverId = #{receiverId}
     </select>
 
+    <select id="findByReceiverUser" resultType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Message">
+        select * from MessageToUser receiverId = #{receiverId}
+    </select>
+
     <insert id="save" parameterType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Message">
         INSERT INTO Message (senderId, receiverId, type, title, body, date, status, senderName, receiverName)
+        VALUES (#{senderId}, #{receiverId}, #{type}, #{title}, #{body}, #{date}, #{status}, #{senderName}, #{receiverName})
+    </insert>
+
+    <insert id="saveUser" parameterType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Message">
+        INSERT INTO MessageToUser (senderId, receiverId, type, title, body, date, status, senderName, receiverName)
         VALUES (#{senderId}, #{receiverId}, #{type}, #{title}, #{body}, #{date}, #{status}, #{senderName}, #{receiverName})
     </insert>
 
@@ -21,6 +30,14 @@
         where messageId= #{messageId}
     </update>
 
+    <update id="readUser">
+        update MessageToUser
+        <set>
+            status = 1
+        </set>
+        where messageId= #{messageId}
+    </update>
+
     <delete id="delete">
         delete from Message where messageId in
         <foreach collection="ids" item="messageId" separator="," open="(" close=")">
@@ -28,8 +45,40 @@
         </foreach>
     </delete>
 
+    <delete id="deleteUser">
+        delete from MessageToUser where messageId in
+        <foreach collection="ids" item="messageId" separator="," open="(" close=")">
+            #{messageId}
+        </foreach>
+    </delete>
+
     <select id="page" resultType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Message">
         select * from Message
+        <where>
+            <if test="senderId != null and senderId != 0">
+                senderId = #{senderId}
+            </if>
+
+            <if test="receiverId != null and receiverId != 0">
+                and receiverId = #{receiverId}
+            </if>
+
+            <if test="status != null">
+                and status = #{status}
+            </if>
+
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+
+            <if test="dateStart != null and dateEnd != null">
+                and date between #{dateStart} and #{dateEnd}
+            </if>
+        </where>
+    </select>
+
+    <select id="pageUser" resultType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Message">
+        select * from MessageToUser
         <where>
             <if test="senderId != null and senderId != 0">
                 senderId = #{senderId}

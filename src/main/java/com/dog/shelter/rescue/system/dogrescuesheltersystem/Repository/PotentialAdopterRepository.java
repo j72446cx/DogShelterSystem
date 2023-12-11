@@ -11,8 +11,8 @@ import java.util.List;
 @Mapper
 public interface PotentialAdopterRepository {
 
-    @Insert("INSERT INTO PotentialAdopter (id, householdMembers, children, otherPets, housingType, housingStability, landlordConsent, workStudySchedule, dailyActivities, incomeLevel, petInsurance, previousPetOwnership, petCareKnowledge, petPreference, emergencyPlan, referencePerson, agreementCompliance, postAdoptionSupportCommitment, landlordContact, adoptionPurpose) " +
-            "VALUES (#{id}, #{householdMembers}, #{children}, #{otherPets}, #{housingType}, #{housingStability}, #{landlordConsent}, #{workStudySchedule}, #{dailyActivities}, #{incomeLevel}, #{petInsurance}, #{previousPetOwnership}, #{petCareKnowledge}, #{petPreference}, #{emergencyPlan}, #{referencePerson}, #{agreementCompliance}, #{postAdoptionSupportCommitment}, #{landlordContact}, #{adoptionPurpose})")
+    @Insert("INSERT INTO PotentialAdopter (id, householdMembers, children, otherPets, housingType, housingStability, landlordConsent, workStudySchedule, dailyActivities, incomeLevel, petInsurance, previousPetOwnership, petCareKnowledge, petPreference, emergencyPlan, referencePerson, agreementCompliance, postAdoptionSupportCommitment, landlordContact, adoptionPurpose, living_room, garden, balcony, kitchen, family_photo, preparation) " +
+            "VALUES (#{id}, #{householdMembers}, #{children}, #{otherPets}, #{housingType}, #{housingStability}, #{landlordConsent}, #{workStudySchedule}, #{dailyActivities}, #{incomeLevel}, #{petInsurance}, #{previousPetOwnership}, #{petCareKnowledge}, #{petPreference}, #{emergencyPlan}, #{referencePerson}, #{agreementCompliance}, #{postAdoptionSupportCommitment}, #{landlordContact}, #{adoptionPurpose}, #{living_room}, #{garden}, #{balcony}, #{kitchen}, #{family_photo}, #{preparation})")
     void save(PotentialAdopter potentialAdopter);
 
     @Select("select * from PotentialAdopter where id = #{id}")
@@ -23,14 +23,17 @@ public interface PotentialAdopterRepository {
     void delete(List<Long> ids);
 
 
-    @Insert("INSERT INTO ApplicationForm (adopter_id, dog_id, living_room, garden, balcony, kitchen, preparation, family_photo, interview_date, reason, status, created_date) " +
-            "VALUES (#{adopter_id}, #{dog_id}, #{living_room}, #{garden}, #{balcony}, #{kitchen}, #{preparation}, #{family_photo}, #{interview_date}, #{reason}, #{status}, #{created_date})")
+    @Insert("INSERT INTO ApplicationForm (adopter_id, dog_id, interview_date, reason, status, created_date) " +
+            "VALUES (#{adopter_id}, #{dog_id}, #{interview_date}, #{reason}, #{status}, #{created_date})")
     void postForm(ApplicationForm applicationForm);
 
-    @Select("select * from ApplicationForm where id = #{id}")
+    @Select("select * from ApplicationForm where id = #{ids}")
     ApplicationForm getForm(Long ids);
 
     void editForm(ApplicationForm applicationForm);
 
     void deleteForm(List<Long> ids);
+
+    @Select("select * from ApplicationForm where adopter_id = #{adopter_id}")
+    List<ApplicationForm> getFormByAdopter(Long adopter_id);
 }

@@ -33,6 +33,13 @@ public class PotentialAdopter {
     private Boolean postAdoptionSupportCommitment;
     private String landlordContact;
 
+    private String living_room;
+    private String garden;
+    private String balcony;
+    private String kitchen;
+    private String family_photo;
+    private String preparation;
+
     @OneToOne
     @MapsId
     @JoinColumn(name = "id")
@@ -40,7 +47,7 @@ public class PotentialAdopter {
 
     public PotentialAdopter(){}
 
-    public PotentialAdopter(Long id, Integer householdMembers, Boolean children, Boolean otherPets, String housingType, String housingStability, Boolean landlordConsent, String workStudySchedule, String dailyActivities, String incomeLevel, Boolean petInsurance, Boolean previousPetOwnership, String petCareKnowledge, String petPreference, String adoptionPurpose, String emergencyPlan, String referencePerson, Boolean agreementCompliance, Boolean postAdoptionSupportCommitment, Customer customer, String landlordContact) {
+    public PotentialAdopter(Long id, Integer householdMembers, Boolean children, Boolean otherPets, String housingType, String housingStability, Boolean landlordConsent, String workStudySchedule, String dailyActivities, String incomeLevel, Boolean petInsurance, Boolean previousPetOwnership, String petCareKnowledge, String petPreference, String adoptionPurpose, String emergencyPlan, String referencePerson, Boolean agreementCompliance, Boolean postAdoptionSupportCommitment, String landlordContact, String living_room, String garden, String balcony, String kitchen, String family_photo, String preparation, Customer customer) {
         this.id = id;
         this.householdMembers = householdMembers;
         this.children = children;
@@ -60,8 +67,62 @@ public class PotentialAdopter {
         this.referencePerson = referencePerson;
         this.agreementCompliance = agreementCompliance;
         this.postAdoptionSupportCommitment = postAdoptionSupportCommitment;
-        this.customer = customer;
         this.landlordContact = landlordContact;
+        this.living_room = living_room;
+        this.garden = garden;
+        this.balcony = balcony;
+        this.kitchen = kitchen;
+        this.family_photo = family_photo;
+        this.preparation = preparation;
+        this.customer = customer;
+    }
+
+    public String getLiving_room() {
+        return living_room;
+    }
+
+    public void setLiving_room(String living_room) {
+        this.living_room = living_room;
+    }
+
+    public String getGarden() {
+        return garden;
+    }
+
+    public void setGarden(String garden) {
+        this.garden = garden;
+    }
+
+    public String getBalcony() {
+        return balcony;
+    }
+
+    public void setBalcony(String balcony) {
+        this.balcony = balcony;
+    }
+
+    public String getKitchen() {
+        return kitchen;
+    }
+
+    public void setKitchen(String kitchen) {
+        this.kitchen = kitchen;
+    }
+
+    public String getFamily_photo() {
+        return family_photo;
+    }
+
+    public void setFamily_photo(String family_photo) {
+        this.family_photo = family_photo;
+    }
+
+    public String getPreparation() {
+        return preparation;
+    }
+
+    public void setPreparation(String preparation) {
+        this.preparation = preparation;
     }
 
     public String getLandlordContact() {
@@ -254,6 +315,13 @@ public class PotentialAdopter {
                 ", referencePerson='" + referencePerson + '\'' +
                 ", agreementCompliance=" + agreementCompliance +
                 ", postAdoptionSupportCommitment=" + postAdoptionSupportCommitment +
+                ", landlordContact='" + landlordContact + '\'' +
+                ", living_room='" + living_room + '\'' +
+                ", garden='" + garden + '\'' +
+                ", balcony='" + balcony + '\'' +
+                ", kitchen='" + kitchen + '\'' +
+                ", family_photo='" + family_photo + '\'' +
+                ", preparation='" + preparation + '\'' +
                 ", customer=" + customer +
                 '}';
     }

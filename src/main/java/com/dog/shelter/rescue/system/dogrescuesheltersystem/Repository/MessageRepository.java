@@ -20,4 +20,14 @@ public interface MessageRepository {
     void read(Long messageId);
 
     void delete(List<Long> ids);
+
+    List<Message> pageUser(Integer page, Integer pageSize, Long senderId, Long receiverId, String type, LocalDate dateStart, LocalDate dateEnd, Integer status);
+
+    void readUser(Long messageId);
+
+    void deleteUser(List<Long> ids);
+
+    void saveUser(Message message);
+
+    List<Message> findByReceiverUser(Long receiver);
 }

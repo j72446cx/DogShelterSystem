@@ -26,11 +26,13 @@ public class Customer {
     private LocalDateTime registerDate;
     private String phoneNumber;
 
+    private Boolean isPotentialAdopter;
+
     public Customer(){
 
     }
 
-    public Customer(Long id, int age, String firstName, String middleName, String lastName, String email, String gender, String address, String postCode, String avatar, String username, String password, LocalDateTime registerDate, String phoneNumber) {
+    public Customer(Long id, int age, String firstName, String middleName, String lastName, String email, String gender, String address, String postCode, String avatar, String username, String password, LocalDateTime registerDate, String phoneNumber, Boolean isPotentialAdopter) {
         this.id = id;
         this.age = age;
         this.firstName = firstName;
@@ -45,6 +47,15 @@ public class Customer {
         this.password = password;
         this.registerDate = registerDate;
         this.phoneNumber = phoneNumber;
+        this.isPotentialAdopter = isPotentialAdopter;
+    }
+
+    public Boolean getPotentialAdopter() {
+        return isPotentialAdopter;
+    }
+
+    public void setPotentialAdopter(Boolean potentialAdopter) {
+        isPotentialAdopter = potentialAdopter;
     }
 
     public Long getId() {
