@@ -5,8 +5,8 @@
 <mapper namespace="com.dog.shelter.rescue.system.dogrescuesheltersystem.Repository.DogPageRepository">
 
     <insert id="feed" parameterType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Request.FeedingRequest">
-        insert into feeding_log(dog_id, staff_id, feeding_time, food_type, quantity, notes)
-        values (#{dog_id}, #{staff_id}, #{feeding_time}, #{food_type}, #{quantity}, #{notes})
+        insert into feeding_log(dog_id, staff_id, feeding_time, food_type, quantity, notes, normal_feed)
+        values (#{dog_id}, #{staff_id}, #{feeding_time}, #{food_type}, #{quantity}, #{notes}, #{normal_feed})
     </insert>
 
     <insert id="exercise" parameterType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Request.ExerciseRequest">
@@ -145,6 +145,14 @@
             <if test="feeding_time_start != null and feeding_time_end != null">
                 and feeding_time between #{feeding_time_start} and #{feeding_time_end}
             </if>
+
+            <if test="normal_feed != null">
+                and normal_feed = #{normal_feed}
+            </if>
+
+            <if test="id != null">
+                and id = #{id}
+            </if>
         </where>
     </select>
 
@@ -247,4 +255,19 @@
 
         </where>
     </select>
+
+    <update id="feedNormal">
+        update feeding_log
+        <set>
+            <if test="normal != null">
+                normal_feed = #{normal},
+            </if>
+
+            <if test="notes != null and notes != ''">
+                notes = #{notes}
+            </if>
+
+        </set>
+        where id = #{feedingRequests}
+    </update>
 </mapper>

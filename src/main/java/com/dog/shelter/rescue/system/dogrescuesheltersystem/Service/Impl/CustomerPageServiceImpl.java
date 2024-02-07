@@ -28,7 +28,9 @@ public class CustomerPageServiceImpl implements CustomerPageService {
 
     @Override
     public void save(Customer customer) {
+        customer.setRegisterDate(LocalDateTime.now());
         customerPageRepository.save(customer);
+
     }
 
     @Override

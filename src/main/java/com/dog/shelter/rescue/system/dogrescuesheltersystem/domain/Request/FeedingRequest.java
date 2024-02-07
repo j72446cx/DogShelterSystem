@@ -2,27 +2,53 @@ package com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Request;
 
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Dog;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Staff;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 public class FeedingRequest {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private Long dog_id;
     private Long staff_id;
     private String food_type;
     private double quantity;
     private String notes;
     private LocalDateTime feeding_time;
+    private int normal_feed;
 
     public FeedingRequest(){};
 
-    public FeedingRequest(Long dog_id, Long staff_id, String food_type, double quantity, String notes, LocalDateTime feeding_time){
+    public FeedingRequest(Long id, Long dog_id, Long staff_id, String food_type, double quantity, String notes, LocalDateTime feeding_time, int normal_feed){
+        this.id = id;
         this.dog_id = dog_id;
         this.staff_id = staff_id;
         this.food_type = food_type;
         this.quantity = quantity;
         this.notes = notes;
         this.feeding_time = feeding_time;
+        this.normal_feed = normal_feed;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getNormal_feed() {
+        return normal_feed;
+    }
+
+    public void setNormal_feed(int normal_feed) {
+        this.normal_feed = normal_feed;
     }
 
     public double getQuantity() {

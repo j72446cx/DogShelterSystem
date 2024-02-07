@@ -121,9 +121,9 @@ public class DogPageServiceImpl implements DogPageService {
 
 
     @Override
-    public DogPageBean getFeed(Integer page, Integer pageSize, Long dog_id, Long staff_id, LocalDate feeding_time_start, LocalDate feeding_time_end) {
+    public DogPageBean getFeed(Integer page, Integer pageSize, Long dog_id, Long staff_id, LocalDate feeding_time_start, LocalDate feeding_time_end, Integer normal_feed, Long id) {
         PageHelper.startPage(page, pageSize);
-        List<FeedingRequest> list =  dogPageRepository.getFeed(dog_id, staff_id, feeding_time_start,feeding_time_end);
+        List<FeedingRequest> list =  dogPageRepository.getFeed(dog_id, staff_id, feeding_time_start,feeding_time_end, normal_feed, id);
         Page<FeedingRequest> feedpage = (Page<FeedingRequest>) list;
         return new DogPageBean(feedpage.getTotal(), feedpage.getResult());
     }
@@ -155,5 +155,10 @@ public class DogPageServiceImpl implements DogPageService {
     @Override
     public List<Staff> dogGetStaff(Long id){
         return dogPageRepository.dogGetStaff(id);
+    }
+
+    @Override
+    public void feedNormal(Long feedingRequests, Integer normal, String notes) {
+        dogPageRepository.feedNormal(feedingRequests, normal, notes);
     }
 }

@@ -82,10 +82,10 @@ public class WebSocket {
 
         if ("staff".equals(userType)) {
             sessionMap.remove(userId);
-            log.info(" [websocket closing] Staff with ID: {} has disconnected", userId);
+            log.info("[websocket closing] Staff with ID: {} has disconnected", userId);
         } else if ("user".equals(userType)) {
             adopterSessionMap.remove(userId);
-            log.info(" [websocket closing] User with ID: {} has disconnected", userId);
+            log.info("[websocket closing] User with ID: {} has disconnected", userId);
         }}
         catch (Exception e) {
             log.error("Error during WebSocket close: {}", e.getMessage());
@@ -233,7 +233,9 @@ public class WebSocket {
                 default:
 
         }
-    }catch (Exception e){};}
+    }catch (Exception e){
+            log.info("Exception: {}", e);
+        };}
 
     @OnError
     public void onError(Throwable error) {

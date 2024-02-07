@@ -48,7 +48,7 @@ public interface DogPageRepository {
 
     void medication(MedicationRequest medicationRequest);
 
-    List<FeedingRequest> getFeed(Long dog_id, Long staff_id, LocalDate feeding_time_start, LocalDate feeding_time_end);
+    List<FeedingRequest> getFeed(Long dog_id, Long staff_id, LocalDate feeding_time_start, LocalDate feeding_time_end, Integer normal_feed, Long id);
 
     List<GroomingRequest> getGrooming(Long dog_id, Long staff_id, LocalDate grooming_time_start, LocalDate grooming_time_end);
 
@@ -68,4 +68,6 @@ public interface DogPageRepository {
 
     @Select("SELECT s.* FROM Staff s INNER JOIN Staff_Dog sd ON s.id = sd.staff_id WHERE sd.dog_id = #{id}")
     List<Staff> dogGetStaff(Long id);
+
+    void feedNormal(Long feedingRequests, Integer normal, String notes);
 }

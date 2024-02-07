@@ -30,11 +30,12 @@ public class DogStaffInteractionController {
             @RequestParam(defaultValue = "10") Integer pageSize,
             Long dog_id, Long staff_id,
                           @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate feeding_time_start,
-                          @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate feeding_time_end){
-        log.info("Feed querying with parameter: with page: {}, pageSize: {}, dog_id: {}, staff_id:{}  feed_time between {} and {},"
-                ,page, pageSize,dog_id, staff_id, feeding_time_start, feeding_time_end);
+                          @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate feeding_time_end,Integer normal_feed, Long id
+            ){
+        log.info("Feed querying with parameter: with page: {}, pageSize: {}, dog_id: {}, staff_id:{}  feed_time between {} and {}, normal_feed: {}, id:{}"
+                ,page, pageSize,dog_id, staff_id, feeding_time_start, feeding_time_end, normal_feed, id);
 
-        return Result.success(dogPageService.getFeed(page, pageSize, dog_id, staff_id, feeding_time_start, feeding_time_end));
+        return Result.success(dogPageService.getFeed(page, pageSize, dog_id, staff_id, feeding_time_start, feeding_time_end, normal_feed, id));
     }
     @GetMapping("/getGrooming")
     public Result getGrooming(
@@ -149,4 +150,10 @@ public class DogStaffInteractionController {
         return Result.success();
     }
 
+    @PutMapping("/feedNormal/{feedingRequests}/{normal}")
+    public Result feedNormal(@PathVariable Long feedingRequests, @PathVariable Integer normal, @RequestParam(required = false) String notes){
+        log.info("{}: Feeding Request: {} today, with notes: {}", normal, feedingRequests.toString(), notes);
+        dogPageService.feedNormal(feedingRequests, normal, notes);
+        return Result.success();
+    }
 }
