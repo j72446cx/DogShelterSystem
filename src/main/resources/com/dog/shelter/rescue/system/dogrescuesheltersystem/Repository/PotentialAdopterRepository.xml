@@ -129,9 +129,9 @@
         update ApplicationForm
         <set>
 
-            <if test="interview_date != null">
+
                 interview_date = #{interview_date},
-            </if>
+
 
             <if test="reason != null and reason != ''">
                 reason = #{reason},
@@ -139,6 +139,18 @@
 
             <if test="status != null and status != ''">
                 status = #{status},
+            </if>
+
+            <if test="pdfURL != null and pdfURL != ''">
+                pdfURL = #{pdfURL},
+            </if>
+
+            <if test="haveCompetitor != null">
+                haveCompetitor = #{haveCompetitor},
+            </if>
+
+            <if test="reject_reason != null">
+                reject_reason = #{reject_reason}
             </if>
 
         </set>

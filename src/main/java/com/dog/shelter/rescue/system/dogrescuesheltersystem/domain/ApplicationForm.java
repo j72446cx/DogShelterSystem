@@ -22,9 +22,13 @@ public class ApplicationForm {
     private LocalDateTime interview_date;
     private LocalDateTime created_date;
 
+    private String pdfURL;
+    private Boolean haveCompetitor;
+    private String reject_reason;
+
     public ApplicationForm(){}
 
-    public ApplicationForm(Long id, Long adopter_id, Long dog_id, String reason, String status, LocalDateTime interview_date, LocalDateTime created_date) {
+    public ApplicationForm(Long id, Long adopter_id, Long dog_id, String reason, String status, LocalDateTime interview_date, LocalDateTime created_date, String pdfURL, Boolean haveCompetitor, String reject_reason) {
         this.id = id;
         this.adopter_id = adopter_id;
         this.dog_id = dog_id;
@@ -32,6 +36,33 @@ public class ApplicationForm {
         this.status = status;
         this.interview_date = interview_date;
         this.created_date = created_date;
+        this.pdfURL = pdfURL;
+        this.haveCompetitor = haveCompetitor;
+        this.reject_reason = reject_reason;
+    }
+
+    public String getReject_reason() {
+        return reject_reason;
+    }
+
+    public void setReject_reason(String reject_reason) {
+        this.reject_reason = reject_reason;
+    }
+
+    public Boolean getHaveCompetitor() {
+        return haveCompetitor;
+    }
+
+    public void setHaveCompetitor(Boolean haveCompetitor) {
+        this.haveCompetitor = haveCompetitor;
+    }
+
+    public String getPdfURL() {
+        return pdfURL;
+    }
+
+    public void setPdfURL(String pdfURL) {
+        this.pdfURL = pdfURL;
     }
 
     public LocalDateTime getCreated_date() {

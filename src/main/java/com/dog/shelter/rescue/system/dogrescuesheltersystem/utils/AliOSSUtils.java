@@ -38,4 +38,24 @@ public class AliOSSUtils {
         return url;
     }
 
+    public String upload(byte[] content, String originalFileName){
+
+        String endpoint = aliOSSProperties.getEndpoint();
+        String accessKeyId = aliOSSProperties.getAccessKeyId();
+        String accessKeySecret = aliOSSProperties.getAccessKeySecret();
+        String bucketName = aliOSSProperties.getBucketName();
+
+        String fileName = UUID.randomUUID().toString() + originalFileName.substring(originalFileName.lastIndexOf("."));
+        OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+
+        try{
+            ossClient.putObject(bucketName, fileName, new ByteArrayInputStream(content));
+            String url = endpoint.split("//")[0] + "//" + bucketName + "." + endpoint.split("//")[1] + "/" + fileName;
+            return url;
+        }finally {
+            ossClient.shutdown();
+        }
+
+    }
+
 }

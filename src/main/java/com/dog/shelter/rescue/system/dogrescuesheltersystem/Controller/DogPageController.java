@@ -30,23 +30,24 @@ public class DogPageController {
                             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate vaccineStartDate,
                             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate vaccineEndDate,
                             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate lastUpdateTimeStart,
-                            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate lastUpdateTimeEnd){
+                            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate lastUpdateTimeEnd,
+                       Boolean is_neutered){
         log.info("Page querying with parameter: with page: {} and pageSize: {}, id: {}, age: {}, gender: {}, " +
                         "entryDate between {} and {}, adoptedDate between {} and {}, vaccineDate between {} and {}," +
-                        " lastUpdateTime between {} and {}",
+                        " lastUpdateTime between {} and {}, is_neutered: {}",
                 page, pageSize, id,
                 age, gender,
                 entryStartDate, entryEndDate,
                 adoptedStartDate,adoptedEndDate,
                 vaccineStartDate, vaccineEndDate,
-                lastUpdateTimeStart, lastUpdateTimeEnd);
+                lastUpdateTimeStart, lastUpdateTimeEnd, is_neutered);
 
         return Result.success(dogPageService.page(
                 page, pageSize, id, species, adoptStatus,
                 age, gender,
                 entryStartDate, entryEndDate,
                 adoptedStartDate, adoptedEndDate,
-                vaccineStartDate, vaccineEndDate, lastUpdateTimeStart, lastUpdateTimeEnd));
+                vaccineStartDate, vaccineEndDate, lastUpdateTimeStart, lastUpdateTimeEnd, is_neutered));
 
     }
 

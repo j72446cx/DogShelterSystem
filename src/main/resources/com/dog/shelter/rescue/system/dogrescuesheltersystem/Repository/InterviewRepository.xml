@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dog.shelter.rescue.system.dogrescuesheltersystem.Repository.InterviewRepository">
+
+    <select id="getInterview" resultType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.InterviewForm">
+        select * from InterviewForm
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+
+            <if test="application_id != null">
+                and application_id = #{application_id}
+            </if>
+
+            <if test="staff_id != null">
+                and staff_id = #{staff_id}
+            </if>
+        </where>
+    </select>
+
+    <update id="edit">
+        update InterviewForm
+        <set>
+
+                body_language = #{body_language},
+
+
+
+                intimate_contact = #{intimate_contact},
+
+
+
+                eye_contact = #{eye_contact},
+
+
+
+                play = #{play},
+
+
+
+                response_instruction = #{response_instruction},
+
+
+
+                summary = #{summary},
+
+
+            <if test="staff_id != null">
+                staff_id = #{staff_id}
+            </if>
+        </set>
+        where application_id = #{application_id}
+    </update>
+</mapper>

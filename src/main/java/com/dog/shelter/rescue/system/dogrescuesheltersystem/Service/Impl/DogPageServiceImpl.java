@@ -3,6 +3,7 @@ package com.dog.shelter.rescue.system.dogrescuesheltersystem.Service.Impl;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.Repository.DogPageRepository;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.Service.DogPageService;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.*;
+import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Beans.DogPageBean;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Request.*;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -13,7 +14,6 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class DogPageServiceImpl implements DogPageService {
@@ -32,7 +32,7 @@ public class DogPageServiceImpl implements DogPageService {
                             LocalDate vaccineStartDate,
                             LocalDate vaccineEndDate,
                             LocalDate lastUpdateTimeStart,
-                            LocalDate lastUpdateTimeEnd
+                            LocalDate lastUpdateTimeEnd, Boolean is_neutered
     ){
 
         PageHelper.startPage(page, pageSize);
@@ -43,7 +43,7 @@ public class DogPageServiceImpl implements DogPageService {
                 adoptedStartDate,
                 adoptedEndDate,
                 vaccineStartDate,
-                vaccineEndDate, lastUpdateTimeStart, lastUpdateTimeEnd);
+                vaccineEndDate, lastUpdateTimeStart, lastUpdateTimeEnd, is_neutered);
         Page<Dog> dogPage = (Page<Dog>) dogList;
 
         // Encapsulate PageBean
@@ -160,5 +160,18 @@ public class DogPageServiceImpl implements DogPageService {
     @Override
     public void feedNormal(Long feedingRequests, Integer normal, String notes) {
         dogPageRepository.feedNormal(feedingRequests, normal, notes);
+    }
+
+
+    @Override
+    public void assignDogToStaff(Long dog_id, Long staff_id) {
+        dogPageRepository.assignDogToStaff(dog_id, staff_id);
+    }
+
+    @Override
+    public void deleteDogFromStaff(Long dog_id, Long staff_id) {
+
+        dogPageRepository.deleteDogFromStaff(dog_id, staff_id);
+
     }
 }

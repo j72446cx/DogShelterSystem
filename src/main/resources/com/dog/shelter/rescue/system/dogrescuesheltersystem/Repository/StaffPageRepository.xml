@@ -104,6 +104,10 @@
                 password = #{password}
             </if>
 
+            <if test="address != null and address != ''">
+                address = #{address}
+            </if>
+
 
 
         </set>

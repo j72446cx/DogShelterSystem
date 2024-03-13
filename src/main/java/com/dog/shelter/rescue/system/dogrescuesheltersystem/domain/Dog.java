@@ -28,6 +28,8 @@ public class Dog {
     private LocalDateTime LastUpdateTime;
     private LocalDateTime lastFeedTime;
 
+    private Boolean is_neutered;
+
     @ManyToMany(mappedBy = "dogs")
     private Set<Staff> staffs = new HashSet<>();
 
@@ -36,7 +38,7 @@ public class Dog {
 
     }
 
-    public Dog(long id, String name, int age, String imgURL, String species, String adoptStatus, String medicalHistory, String intro, String gender, LocalDateTime entryDate, LocalDateTime adoptedDate, LocalDateTime lastVaccineDate, LocalDateTime lastUpdateTime, LocalDateTime lastFeedTime, Set<Staff> staffs) {
+    public Dog(long id, String name, int age, String imgURL, String species, String adoptStatus, String medicalHistory, String intro, String gender, LocalDateTime entryDate, LocalDateTime adoptedDate, LocalDateTime lastVaccineDate, LocalDateTime lastUpdateTime, LocalDateTime lastFeedTime, Set<Staff> staffs, Boolean is_neutered) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -52,6 +54,15 @@ public class Dog {
         LastUpdateTime = lastUpdateTime;
         this.lastFeedTime = lastFeedTime;
         this.staffs = staffs;
+        this.is_neutered = is_neutered;
+    }
+
+    public Boolean getIs_neutered() {
+        return is_neutered;
+    }
+
+    public void setIs_neutered(Boolean is_neutered) {
+        this.is_neutered = is_neutered;
     }
 
     public Set<Staff> getStaffs() {

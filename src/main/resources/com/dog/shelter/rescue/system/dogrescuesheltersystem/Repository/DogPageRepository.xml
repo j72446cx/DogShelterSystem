@@ -253,6 +253,10 @@
                 and LastUpdateTime between #{lastUpdateTimeStart} and #{lastUpdateTimeEnd}
             </if>
 
+            <if test="is_neutered != null">
+                and is_neutered = #{is_neutered}
+            </if>
+
         </where>
     </select>
 

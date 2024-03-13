@@ -25,5 +25,23 @@ public class UploadController {
         return Result.success(url);
     }
 
+    @PostMapping("/uploadPdf")
+    public Result uploadPdf(MultipartFile file) throws IOException{
+
+
+        log.info("Pdf uploading: {}", file.getOriginalFilename());
+
+        // 从MultipartFile获取字节内容和原始文件名
+        byte[] content = file.getBytes();
+        String originalFileName = file.getOriginalFilename();
+
+        // 调用AliOSSUtils的upload方法上传PDF
+        String url = aliOSSUtils.upload(content, originalFileName);
+
+        log.info("Pdf upload successfully, with url: {}", url);
+
+        return Result.success(url);
+    }
+
 
 }

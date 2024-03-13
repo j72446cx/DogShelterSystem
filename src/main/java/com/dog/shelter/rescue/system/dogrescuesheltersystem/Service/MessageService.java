@@ -1,7 +1,7 @@
 package com.dog.shelter.rescue.system.dogrescuesheltersystem.Service;
 
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Message;
-import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.MessagePageBean;
+import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Beans.MessagePageBean;
 
 import java.time.LocalDate;
 import java.util.List;

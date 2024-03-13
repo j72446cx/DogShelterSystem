@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dog.shelter.rescue.system.dogrescuesheltersystem.Repository.ReviewingPageRepository">
+
+    <update id="edit">
+    update ReviewingForm
+    <set>
+        <if test="customer_info_notes != null and customer_info_notes != ''">
+            customer_info_notes = #{customer_info_notes},
+        </if>
+
+        <if test="form_info_notes != null and form_info_notes != ''">
+            form_info_notes = #{form_info_notes},
+        </if>
+
+         <if test="family_member_notes != null and family_member_notes != ''">
+             family_member_notes = #{family_member_notes},
+        </if>
+        <if test="residence_info_notes != null and residence_info_notes != ''">
+            residence_info_notes = #{residence_info_notes},
+        </if>
+        <if test="personal_background_notes != null and personal_background_notes != ''">
+            personal_background_notes = #{personal_background_notes},
+        </if>
+        <if test="dog_care_notes != null and dog_care_notes != ''">
+            dog_care_notes = #{dog_care_notes},
+        </if>
+        <if test="overall_notes != null and overall_notes != ''">
+            overall_notes = #{overall_notes},
+        </if>
+
+        <if test="staff_id != null">
+            staff_id = #{staff_id}
+        </if>
+    </set>
+        where application_id = #{application_id}
+    </update>
+
+
+    <select id="getReviewing" resultType="com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.ReviewingForm">
+        select * from ReviewingForm
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+
+            <if test="application_id != null">
+                and application_id = #{application_id}
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -86,6 +86,20 @@ public class DogStaffInteractionController {
         return Result.success(dogPageService.dogGetStaff(id));
     }
 
+    @PostMapping("/assign/{dog_id}/{staff_id}")
+    public Result assignDogToStaff(@PathVariable Long dog_id, @PathVariable Long staff_id){
+        log.info("Assigning dog: {} to staff: {}", dog_id, staff_id);
+        dogPageService.assignDogToStaff(dog_id, staff_id);
+        return Result.success();
+    }
+
+    @DeleteMapping("/deleteAssign")
+    public Result deleteDogFromStaff(Long dog_id, Long staff_id){
+        log.info("Deleting dog: {} from staff: {}", dog_id, staff_id);
+        dogPageService.deleteDogFromStaff(dog_id, staff_id);
+        return Result.success();
+    }
+
 
     @DeleteMapping("/deleteExercise/{ids}")
     public Result deleteExercise(@PathVariable List<Long> ids){

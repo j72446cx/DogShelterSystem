@@ -1,17 +1,15 @@
 package com.dog.shelter.rescue.system.dogrescuesheltersystem.Repository;
 
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Dog;
-import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.DogPageBean;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Request.*;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Staff;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @Mapper
 public interface DogPageRepository {
@@ -25,12 +23,13 @@ public interface DogPageRepository {
                           LocalDate vaccineStartDate,
                           LocalDate vaccineEndDate,
                    LocalDate lastUpdateTimeStart,
-                   LocalDate lastUpdateTimeEnd
+                   LocalDate lastUpdateTimeEnd,
+                   Boolean is_neutered
                    );
 
     void delete(List<Long> ids);
 
-    @Insert("INSERT INTO Dog (name, age, imgURL, species, AdoptStatus, MedicalHistory, intro, gender, EntryDate, AdoptedDate, LastVaccineDate, LastUpdateTime) VALUES (#{name}, #{age}, #{imgURL}, #{species}, #{AdoptStatus}, #{MedicalHistory}, #{intro}, #{gender}, #{EntryDate}, #{AdoptedDate}, #{LastVaccineDate}, #{LastUpdateTime})")
+    @Insert("INSERT INTO Dog (name, age, imgURL, species, AdoptStatus, MedicalHistory, intro, gender, EntryDate, AdoptedDate, LastVaccineDate, LastUpdateTime, is_neutered) VALUES (#{name}, #{age}, #{imgURL}, #{species}, #{AdoptStatus}, #{MedicalHistory}, #{intro}, #{gender}, #{EntryDate}, #{AdoptedDate}, #{LastVaccineDate}, #{LastUpdateTime}, #{is_neutered})")
     void insert(Dog dog);
 
     void edit(Dog dog);
@@ -70,4 +69,10 @@ public interface DogPageRepository {
     List<Staff> dogGetStaff(Long id);
 
     void feedNormal(Long feedingRequests, Integer normal, String notes);
+
+    @Insert("INSERT INTO Staff_Dog (dog_id, staff_id) VALUES(#{dog_id}, #{staff_id})")
+    void assignDogToStaff(Long dog_id, Long staff_id);
+
+    @Delete("DELETE from Staff_Dog WHERE dog_id=#{dog_id} AND staff_id=#{staff_id}")
+    void deleteDogFromStaff(Long dog_id, Long staff_id);
 }

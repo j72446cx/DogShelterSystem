@@ -1,9 +1,8 @@
 package com.dog.shelter.rescue.system.dogrescuesheltersystem.Service;
 
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Dog;
-import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.DogPageBean;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Staff;
-import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.StaffPageBean;
+import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Beans.StaffPageBean;
 
 import java.time.LocalDate;
 import java.util.List;

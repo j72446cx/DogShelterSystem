@@ -1,5 +1,4 @@
-package com.dog.shelter.rescue.system.dogrescuesheltersystem.domain;
-
+package com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Beans;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +9,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MessagePageBean {
+public class ReviewingFormBean {
 
     private long total;
     private List rows;

@@ -1,9 +1,7 @@
 package com.dog.shelter.rescue.system.dogrescuesheltersystem.Repository;
 
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Message;
-import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.MessagePageBean;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;
 import java.util.List;

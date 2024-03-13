@@ -23,8 +23,8 @@ public interface PotentialAdopterRepository {
     void delete(List<Long> ids);
 
 
-    @Insert("INSERT INTO ApplicationForm (adopter_id, dog_id, interview_date, reason, status, created_date) " +
-            "VALUES (#{adopter_id}, #{dog_id}, #{interview_date}, #{reason}, #{status}, #{created_date})")
+    @Insert("INSERT INTO ApplicationForm (adopter_id, dog_id, interview_date, reason, status, created_date, haveCompetitor, pdfURL) " +
+            "VALUES (#{adopter_id}, #{dog_id}, #{interview_date}, #{reason}, #{status}, #{created_date}, #{haveCompetitor}, #{pdfURL})")
     void postForm(ApplicationForm applicationForm);
 
     @Select("select * from ApplicationForm where id = #{ids}")
@@ -36,4 +36,10 @@ public interface PotentialAdopterRepository {
 
     @Select("select * from ApplicationForm where adopter_id = #{adopter_id}")
     List<ApplicationForm> getFormByAdopter(Long adopter_id);
+
+    @Select("select * from ApplicationForm where status = #{status}")
+    List<ApplicationForm> getFormByStatus(String status);
+
+    @Select("select * from ApplicationForm where status != 'Rejected' and dog_id = #{dog_id}")
+    List<ApplicationForm> getFormByDog(Long dog_id);
 }

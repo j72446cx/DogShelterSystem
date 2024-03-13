@@ -1,4 +1,4 @@
-package com.dog.shelter.rescue.system.dogrescuesheltersystem.domain;
+package com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Beans;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,12 +1,11 @@
 package com.dog.shelter.rescue.system.dogrescuesheltersystem.Service;
 
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.*;
+import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Beans.DogPageBean;
 import com.dog.shelter.rescue.system.dogrescuesheltersystem.domain.Request.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 public interface DogPageService {
 
@@ -20,7 +19,7 @@ public interface DogPageService {
                      LocalDate vaccineStartDate,
                      LocalDate vaccineEndDate,
                      LocalDate lastUpdateTimeStart,
-                     LocalDate lastUpdateTimeEnd);
+                     LocalDate lastUpdateTimeEnd, Boolean is_neutered);
 
     void delete(List<Long> ids);
 
@@ -58,4 +57,8 @@ public interface DogPageService {
     List<Staff> dogGetStaff(Long id);
 
     void feedNormal(Long feedingRequests, Integer normal, String notes);
+
+    void assignDogToStaff(Long dog_id, Long staff_id);
+
+    void deleteDogFromStaff(Long dog_id, Long staff_id);
 }

@@ -17,7 +17,7 @@
     <update id="edit">
         update Customer
         <set>
-            <if test="age != null">
+            <if test="age != null and age != 0">
                 age = #{age},
             </if>
 
@@ -59,6 +59,10 @@
 
             <if test="address != null and address != ''">
                 address = #{address},
+            </if>
+
+            <if test="password != null and password != ''">
+                password = #{password}
             </if>
 
         </set>
